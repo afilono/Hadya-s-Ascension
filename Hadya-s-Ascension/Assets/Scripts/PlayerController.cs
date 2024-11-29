@@ -1,15 +1,23 @@
 using UnityEngine;
 
-
 public class PlayerController : MonoBehaviour
 {
     // Параметры игрока
     public float health = 100f; // Здоровье
-    public float attackPower = 20f; // Сила атаки
     public float moveSpeed = 5f; // Скорость движения
+
+    [Header("Combat")]
+    public GameObject projectilePrefab; // Префаб снаряда
+    public Transform firePoint; // Точка выстрела
+    public float projectileSpeed = 10f; // Скорость снаряда
+    public float fireCooldown = 0.5f; // Кулдаун между выстрелами
 
     private Rigidbody2D rb; // Для управления физикой
     private Vector2 movement; // Направление движения
+    private float lastFireTime = 0f; // Время последнего выстрела
+
+    [Header("Health System")]
+    public HealthBar healthBar; // Ссылка на полоску здоровья
 
     void Start()
     {
@@ -17,20 +25,9 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         // Инициализация полоски здоровья
-        healthBar.SetMaxHealth(health);
-    }
-    // Ссылка на полоску здоровья
-    public HealthBar healthBar; 
-
-
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-        healthBar.SetHealth(health);
-
-        if (health <= 0)
+        if (healthBar != null)
         {
-            Die();
+            healthBar.SetMaxHealth(health);
         }
     }
 
@@ -43,11 +40,12 @@ public class PlayerController : MonoBehaviour
         // Ограничиваем здоровье
         health = Mathf.Clamp(health, 0, 100);
 
-        // Атака
-    if (Input.GetKeyDown(KeyCode.Space))
-    {
-        AttackNearbyEnemies();
-    }
+        // Атака снарядом
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= lastFireTime + fireCooldown)
+        {
+            FireProjectile();
+            lastFireTime = Time.time; // Сбрасываем таймер кулдауна
+        }
     }
 
     void FixedUpdate()
@@ -56,45 +54,41 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = movement * moveSpeed;
     }
 
-
-    // Метод нанесения урона врагу
-    public void Attack(EnemyController enemy)
+    public void TakeDamage(float damage)
     {
-        enemy.TakeDamage(attackPower);
+        health -= damage;
+
+        // Обновляем полоску здоровья
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(health);
+        }
+
+        if (health <= 0)
+        {
+            Die();
+        }
     }
 
-    // Метод смерти игрока
     void Die()
     {
         Debug.Log("Игрок погиб!");
-        // Например, перезапустить уровень
+        // Перезапуск уровня
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
-
-
-void AttackNearbyEnemies()
-{
-    float attackRange = 0.5f; // Дистанция атаки
-    Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, attackRange);
-
-    foreach (Collider2D enemyCollider in hitEnemies)
+    void FireProjectile()
     {
-        EnemyController enemy = enemyCollider.GetComponent<EnemyController>();
-        if (enemy != null)
+        if (projectilePrefab == null || firePoint == null) return;
+
+        // Создаем снаряд
+        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+
+        // Добавляем скорость снаряду
+        Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
+        if (projectileRb != null)
         {
-            Attack(enemy);
+            projectileRb.linearVelocity = firePoint.up * projectileSpeed;
         }
     }
 }
-
-// Рисование радиуса атаки в редакторе
-void OnDrawGizmosSelected()
-{
-    Gizmos.color = Color.red;
-    Gizmos.DrawWireSphere(transform.position, 0.5f);
-}
-
-    
-}
-

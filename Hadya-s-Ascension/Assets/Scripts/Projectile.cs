@@ -2,20 +2,24 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed = 10f;
-    public int damage = 20;
+    public float damage = 20f; // Урон, который наносит снаряд
+    public float lifeTime = 2f; // Время жизни снаряда
 
-    void Update()
+    void Start()
     {
-        transform.Translate(Vector2.up * speed * Time.deltaTime);
+        // Уничтожаем снаряд через заданное время
+        Destroy(gameObject, lifeTime);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        // Проверяем, столкнулся ли снаряд с врагом
+        EnemyController enemy = collision.GetComponent<EnemyController>();
+        if (enemy != null)
         {
-            collision.GetComponent<EnemyController>().TakeDamage(damage);
-            Destroy(gameObject);
+            // Наносим урон врагу
+            enemy.TakeDamage(damage);
+            Destroy(gameObject); // Уничтожаем снаряд после попадания
         }
     }
 }
