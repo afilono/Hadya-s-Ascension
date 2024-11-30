@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         // Передвижение
-        rb.linearVelocity = movement * moveSpeed;
+        rb.velocity = movement * moveSpeed;
     }
 
     public void TakeDamage(float damage)
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
         Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
         if (projectileRb != null)
         {
-            projectileRb.linearVelocity = firePoint.up * projectileSpeed;
+            projectileRb.velocity = firePoint.up * projectileSpeed;
         }
     }
 }
