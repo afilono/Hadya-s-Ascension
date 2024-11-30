@@ -1,0 +1,628 @@
+fileFormatVersion: 2
+guid: 73fbdeb114fae8045ad78c41d7628505
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3894948526583004946
+    second: leftward-sprites_0
+  - first:
+      213: 9117511584253368249
+    second: leftward-sprites_1
+  - first:
+      213: -4034080948614549148
+    second: leftward-sprites_2
+  - first:
+      213: -8788078942730357966
+    second: leftward-sprites_3
+  - first:
+      213: 8429153499169107322
+    second: leftward-sprites_4
+  - first:
+      213: 7850067539144474909
+    second: leftward-sprites_5
+  - first:
+      213: -6500667310670419913
+    second: leftward-sprites_6
+  - first:
+      213: 507633870351643654
+    second: leftward-sprites_7
+  - first:
+      213: -3268963375309827447
+    second: leftward-sprites_8
+  - first:
+      213: -4699373342515276521
+    second: leftward-sprites_9
+  - first:
+      213: -465209652803778001
+    second: leftward-sprites_10
+  - first:
+      213: 4234044608560140237
+    second: leftward-sprites_11
+  - first:
+      213: 8782436629775930451
+    second: leftward-sprites_12
+  - first:
+      213: 2564419424638268152
+    second: leftward-sprites_13
+  - first:
+      213: 1174961863859936005
+    second: leftward-sprites_14
+  - first:
+      213: 2682621498388345962
+    second: leftward-sprites_15
+  - first:
+      213: -9140899041397229955
+    second: leftward-sprites_16
+  - first:
+      213: -5305960823931733024
+    second: leftward-sprites_17
+  - first:
+      213: 451327248896452378
+    second: leftward-sprites_18
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: leftward-sprites_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 3
+        width: 36
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee0c69e83fc52f9c0800000000000000
+      internalID: -3894948526583004946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_1
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 3
+        width: 36
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b75eeeaa78e78e70800000000000000
+      internalID: 9117511584253368249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_2
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 3
+        width: 36
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 461b8ae20c01408c0800000000000000
+      internalID: -4034080948614549148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_3
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 3
+        width: 36
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 233777843c87a0680800000000000000
+      internalID: -8788078942730357966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_4
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 3
+        width: 36
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7d273ba27e5af470800000000000000
+      internalID: 8429153499169107322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_5
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 3
+        width: 37
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d11088dd5da01fc60800000000000000
+      internalID: 7850067539144474909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_6
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 3
+        width: 37
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 738ee70e58df8c5a0800000000000000
+      internalID: -6500667310670419913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_7
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 3
+        width: 36
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6043446c05a7b0700800000000000000
+      internalID: 507633870351643654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_8
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 3
+        width: 36
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98255ee312f42a2d0800000000000000
+      internalID: -3268963375309827447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_9
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 3
+        width: 36
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 715df64e7d878ceb0800000000000000
+      internalID: -4699373342515276521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_10
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 3
+        width: 36
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2a4c8a194e3b89f0800000000000000
+      internalID: -465209652803778001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_11
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 3
+        width: 36
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcf8268732952ca30800000000000000
+      internalID: 4234044608560140237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_12
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 3
+        width: 36
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3545c2c559b71e970800000000000000
+      internalID: 8782436629775930451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_13
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 3
+        width: 36
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f2fcac31e5a69320800000000000000
+      internalID: 2564419424638268152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_14
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 3
+        width: 37
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50b9008079d4e4010800000000000000
+      internalID: 1174961863859936005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_15
+      rect:
+        serializedVersion: 2
+        x: 975
+        y: 3
+        width: 37
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6473462a069a3520800000000000000
+      internalID: 2682621498388345962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_16
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 3
+        width: 36
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d763fcd90c0052180800000000000000
+      internalID: -9140899041397229955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_17
+      rect:
+        serializedVersion: 2
+        x: 1103
+        y: 3
+        width: 36
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ebf8692eb07d56b0800000000000000
+      internalID: -5305960823931733024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leftward-sprites_18
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 3
+        width: 36
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a176debddbf634600800000000000000
+      internalID: 451327248896452378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      leftward-sprites_0: -3894948526583004946
+      leftward-sprites_1: 9117511584253368249
+      leftward-sprites_10: -465209652803778001
+      leftward-sprites_11: 4234044608560140237
+      leftward-sprites_12: 8782436629775930451
+      leftward-sprites_13: 2564419424638268152
+      leftward-sprites_14: 1174961863859936005
+      leftward-sprites_15: 2682621498388345962
+      leftward-sprites_16: -9140899041397229955
+      leftward-sprites_17: -5305960823931733024
+      leftward-sprites_18: 451327248896452378
+      leftward-sprites_2: -4034080948614549148
+      leftward-sprites_3: -8788078942730357966
+      leftward-sprites_4: 8429153499169107322
+      leftward-sprites_5: 7850067539144474909
+      leftward-sprites_6: -6500667310670419913
+      leftward-sprites_7: 507633870351643654
+      leftward-sprites_8: -3268963375309827447
+      leftward-sprites_9: -4699373342515276521
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
