@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     [Header("Health System")]
     public HealthBar healthBar; // Ссылка на полоску здоровья
 
-    private int movementDirection; // 0 - стоит на месте, 1 - вперёд, 2 - назад, 3 - влево, 4 - вправо
+    public int movementDirection; // 0 - стоит на месте, 1 - вперёд, 2 - назад, 3 - влево, 4 - вправо
 
     void Start()
     {
@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
             healthBar.SetMaxHealth(health);
         }
     }
-
 
     void Update()
     {
@@ -64,9 +63,10 @@ public class PlayerController : MonoBehaviour
         {
             movementDirection = 0; // Стоит на месте
         }
-        
+
+        // Передаем переменную для анимации
         animator.SetInteger("MovementDirection", movementDirection);
-        
+
         // Ограничиваем здоровье
         health = Mathf.Clamp(health, 0, 100);
 
@@ -114,11 +114,7 @@ public class PlayerController : MonoBehaviour
         // Создаем снаряд
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
 
-        // Добавляем скорость снаряду
-        Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
-        if (projectileRb != null)
-        {
-            projectileRb.velocity = firePoint.up * projectileSpeed;
-        }
+        // Передаем направление движения в снаряд
+        projectile.GetComponent<Projectile>().SetDirection(movementDirection);
     }
 }
