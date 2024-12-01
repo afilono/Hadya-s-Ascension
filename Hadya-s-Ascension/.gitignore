@@ -24,6 +24,7 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.vsconfig
 
 *.apk
 *.aab
