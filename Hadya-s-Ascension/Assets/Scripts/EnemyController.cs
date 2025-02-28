@@ -31,11 +31,18 @@ public class EnemyController : MonoBehaviour
 
     void MoveTowardsTarget()
     {
+        if (target == null) return;
+
         // Направление движения
         Vector3 direction = (target.position - transform.position).normalized;
 
-        // Движение в сторону цели
-        transform.position += direction * speed * Time.deltaTime;
+        // Проверка на наличие стены перед врагом
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, speed * Time.deltaTime, LayerMask.GetMask("Wall"));
+        if (hit.collider == null)
+        {
+            // Движение в сторону цели
+            transform.position += direction * speed * Time.deltaTime;
+        }
     }
 
     void Attack()

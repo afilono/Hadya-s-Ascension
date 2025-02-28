@@ -9,14 +9,20 @@ public class HealthBar : MonoBehaviour
     // Установить максимальное здоровье
     public void SetMaxHealth(float maxHealth)
     {
-        slider.maxValue = maxHealth;
-        slider.value = maxHealth;
+        if (slider != null)
+        {
+            slider.maxValue = maxHealth;
+            slider.value = maxHealth;
+        }
     }
 
     // Обновить текущее здоровье
     public void SetHealth(float health)
     {
-        slider.value = health;
+        if (slider != null)
+        {
+            slider.value = health;
+        }
     }
 
     void Update()
