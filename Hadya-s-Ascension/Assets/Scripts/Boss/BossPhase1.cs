@@ -1,39 +1,29 @@
 using UnityEngine;
 
-public class Boss1PhaseAttack : StateMachineBehaviour
+public class BossPhase1 : StateMachineBehaviour
 {
     public float speed = 2.5f; // Скорость движения босса
-    public float attackRange = 3f; // Радиус атаки
+    public float attackRange = 3f; // Радиус атаки мечом
     public float attackCooldown = 2f; // Время между атаками
     public LayerMask wallMask; // Слой стен
 
-    Transform player; // Ссылка на игрока
-    Rigidbody2D rb; // Ссылка на Rigidbody2D босса
-    Boss boss; // Ссылка на скрипт Boss
-    BossWeapon bossWeapon; // Ссылка на оружие босса
-    float lastAttackTime = 0f; // Время последней атаки
+    private Transform player; // Ссылка на игрока
+    private Rigidbody2D rb; // Ссылка на Rigidbody2D босса
+    private BossWeapon bossWeapon; // Ссылка на оружие босса
+    private float lastAttackTime = 0f; // Время последней атаки
 
     // OnStateEnter вызывается при входе в состояние
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameObject.FindGameObjectWithTag("Player").transform; // Находим игрока по тегу
         rb = animator.GetComponent<Rigidbody2D>(); // Получаем Rigidbody2D
-        boss = animator.GetComponent<Boss>(); // Получаем скрипт Boss
         bossWeapon = animator.GetComponent<BossWeapon>(); // Получаем оружие босса
-
-        // Убедимся, что игрок назначен в Boss
-        if (boss != null && boss.Player == null)
-        {
-            boss.Player = player;
-        }
     }
 
     // OnStateUpdate вызывается на каждом кадре, пока активно состояние
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (boss == null || player == null) return; // Проверяем, что boss и player назначены
-
-        boss.LookAtPlayer(); // Поворачиваем босса к игроку
+        if (player == null) return;
 
         // Двигаем босса к игроку, если нет стены на пути
         Vector2 direction = (player.position - rb.transform.position).normalized;
@@ -50,7 +40,7 @@ public class Boss1PhaseAttack : StateMachineBehaviour
         {
             if (Time.time >= lastAttackTime + attackCooldown)
             {
-                animator.SetTrigger("AttackMelee"); // Запускаем анимацию атаки
+                animator.SetTrigger("AttackMelee"); // Запускаем анимацию атаки мечом
                 bossWeapon.Attack(); // Вызываем метод атаки
                 lastAttackTime = Time.time;
             }

@@ -8936,7 +8936,7 @@ MonoBehaviour:
   attackRange: 1
   attackMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!114 &940051704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8961,7 +8961,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344efaa746995454e8c1ae866b001726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  Player: {fileID: 2035208114}
+  maxHealth: 100
+  currentHealth: 0
+  phase2HealthThreshold: 50
   isFlipped: 0
 --- !u!50 &940051706
 Rigidbody2D:
@@ -11852,7 +11855,7 @@ MonoBehaviour:
     m_Bits: 320
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!1 &1103128089
 GameObject:
   m_ObjectHideFlags: 0
@@ -16198,7 +16201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1536547536}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38699,7 +38702,8 @@ GameObject:
   - component: {fileID: 2035208116}
   - component: {fileID: 2035208118}
   - component: {fileID: 2035208117}
-  m_Layer: 0
+  - component: {fileID: 2035208119}
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -38893,7 +38897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1294bfefc7aec34988660f9eb45e87d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 10000
   moveSpeed: 5
   projectilePrefab: {fileID: 1074482219}
   firePoint: {fileID: 2035208114}
@@ -38902,6 +38906,23 @@ MonoBehaviour:
   animator: {fileID: 2035208115}
   healthBar: {fileID: 2035208117}
   movementDirection: 0
+--- !u!114 &2035208119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035208109}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5f1eada2f269ca46a1bcfe6a440f495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 10
+  attackRange: 1
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &2092639662
 GameObject:
   m_ObjectHideFlags: 0
