@@ -1,18 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class BossHealth : MonoBehaviour
+public class BossHealthUI : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Slider healthSlider; // —сылка на UI Slider
+    public Boss boss; // —сылка на скрипт Boss
+
     void Start()
     {
-        
+        if (boss == null)
+        {
+            Debug.LogError("Boss reference is not set in BossHealthUI.");
+            return;
+        }
+
+        // ”станавливаем максимальное значение здоровь€ босса в Slider
+        healthSlider.maxValue = boss.maxHealth;
+        healthSlider.value = boss.currentHealth;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        // ќбновл€ем значение Slider в зависимости от текущего здоровь€ босса
+        if (boss != null)
+        {
+            healthSlider.value = boss.currentHealth;
+        }
     }
 }

@@ -11,6 +11,9 @@ public class Boss : MonoBehaviour
     private bool isPhase2 = false; // ‘лаг второй фазы
     public bool isFlipped = false;
 
+    public delegate void BossDeathHandler();
+    public static event BossDeathHandler OnBossDeath;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -49,6 +52,7 @@ public class Boss : MonoBehaviour
     {
         Debug.Log("Ѕосс погиб!");
         // «десь можно добавить логику смерти босса (например, анимацию или завершение уровн€)
+        OnBossDeath?.Invoke();
         Destroy(gameObject);
     }
 
