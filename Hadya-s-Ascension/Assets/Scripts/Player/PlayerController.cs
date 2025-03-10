@@ -61,11 +61,12 @@ public class PlayerController : MonoBehaviour
         rb.velocity = movement * moveSpeed;
     }
 
+    
     public void TakeDamage(float damage)
     {
         health -= damage;
 
-        // 
+        // Обновляем полоску здоровья
         if (healthBar != null)
         {
             healthBar.SetHealth(health);
