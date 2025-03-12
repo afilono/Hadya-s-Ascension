@@ -6,9 +6,7 @@ public class HealthBarColorChanger : MonoBehaviour
     public Slider healthSlider; // Ссылка на UI Slider
     public Image fillImage; // Ссылка на Image, который заполняет полоску здоровья
     public Boss boss; // Ссылка на скрипт Boss
-
-    public Color fullHealthColor = Color.green; // Цвет при полном здоровье
-    public Color lowHealthColor = Color.red; // Цвет при низком здоровье
+    public Gradient healthGradient; // Градиент для изменения цвета полоски здоровья
 
     void Start()
     {
@@ -22,6 +20,9 @@ public class HealthBarColorChanger : MonoBehaviour
         healthSlider.maxValue = boss.maxHealth;
         healthSlider.value = boss.currentHealth;
 
+        // Устанавливаем начальный цвет полоски здоровья в соответствии с градиентом
+        fillImage.color = healthGradient.Evaluate(1f); // 1f соответствует максимальному здоровью
+
         // Подписываемся на событие смерти босса
         Boss.OnBossDeath += HideHealthBar;
     }
@@ -33,9 +34,9 @@ public class HealthBarColorChanger : MonoBehaviour
             // Обновляем значение Slider в зависимости от текущего здоровья босса
             healthSlider.value = boss.currentHealth;
 
-            // Изменяем цвет полоски здоровья в зависимости от процента здоровья
+            // Изменяем цвет полоски здоровья в соответствии с градиентом
             float healthPercentage = (float)boss.currentHealth / boss.maxHealth;
-            fillImage.color = Color.Lerp(lowHealthColor, fullHealthColor, healthPercentage);
+            fillImage.color = healthGradient.Evaluate(healthPercentage);
         }
     }
 

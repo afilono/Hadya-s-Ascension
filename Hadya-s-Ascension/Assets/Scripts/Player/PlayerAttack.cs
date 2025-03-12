@@ -19,7 +19,7 @@ public class PlayerAttack : MonoBehaviour
     {
         // Получаем позицию атаки (перед игроком)
         Vector2 attackPos = (Vector2)transform.position + Vector2.right * transform.localScale.x;
-
+        Vector2 attackPossition = Input.mousePosition;
         // Проверяем, есть ли враг в радиусе атаки
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPos, attackRange, enemyMask);
         foreach (Collider2D enemy in hitEnemies)
