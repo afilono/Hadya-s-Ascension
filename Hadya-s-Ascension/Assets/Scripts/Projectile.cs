@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
 
     private Vector2 moveDirection; // Direction of the projectile
 
-    private void Start()
+    void Start()
     {
         // Activate the projectile to make it visible
         gameObject.SetActive(true);
@@ -30,16 +30,11 @@ public class Projectile : MonoBehaviour
     }
 
     // Helper method to convert a LayerMask to a layer index
-    private int LayerMaskToLayerIndex(LayerMask layerMask)
+    private int LayerMaskToLayerIndex(LayerMask mask)
     {
-        // Get the layer name from the LayerMask
-        string layerName = LayerMask.LayerToName(layerMask);
-
-        // Convert the layer name to a layer index
-        int layerIndex = LayerMask.NameToLayer(layerName);
-
-        // Return the layer index
-        return layerIndex;
+        int layerValue = mask.value;
+        if (layerValue == 0) return -1;
+        return (int)Mathf.Log(layerValue, 2);
     }
 
     // Method to set the direction of the projectile

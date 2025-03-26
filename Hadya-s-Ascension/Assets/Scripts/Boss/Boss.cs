@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class Boss : MonoBehaviour
     public delegate void BossDeathHandler();
     public static event BossDeathHandler OnBossDeath;
 
+    public Boss boss;
+    public Slider healthSlider;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -24,6 +28,21 @@ public class Boss : MonoBehaviour
         {
             Player = GameObject.FindGameObjectWithTag("Player").transform;
         }
+
+        if (boss == null)
+        {
+            boss = FindObjectOfType<Boss>();
+            if (boss == null) Debug.LogError("Boss not found in the scene!");
+        }
+
+        if (healthSlider == null)
+        {
+            healthSlider = GetComponent<Slider>();
+            if (healthSlider == null) Debug.LogError("Health Slider not assigned!");
+        }
+
+        healthSlider.maxValue = boss.maxHealth;
+        healthSlider.value = boss.currentHealth;
     }
 
     void Update()
@@ -32,7 +51,7 @@ public class Boss : MonoBehaviour
         if (!isPhase2 && currentHealth <= phase2HealthThreshold)
         {
             isPhase2 = true;
-            animator.SetTrigger("HpDrain"); // Переход во вторую фазу
+            animator.SetBool("IsPhase2", true); // Используем булевый параметр вместо триггера
             Debug.Log("Босс перешёл во вторую фазу!");
         }
     }

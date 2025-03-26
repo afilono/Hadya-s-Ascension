@@ -131,3 +131,10 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 1.1666666
+    functionName: ShootArrow
+    data: 
+    objectReferenceParameter: {fileID: 1716584259980830300, guid: 4ec7adfca3dd39e45a7b15cd2a53e70d, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

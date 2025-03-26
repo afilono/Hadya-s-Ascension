@@ -3,28 +3,38 @@ using UnityEngine.UI;
 
 public class BossHealthUI : MonoBehaviour
 {
-    public Slider healthSlider; // Ссылка на UI Slider
-    public Boss boss; // Ссылка на скрипт Boss
+    public Slider healthSlider;
+    public Boss boss;
 
     void Start()
     {
-        if (boss == null)
+        // Автопоиск, если не назначено
+        if (boss == null) boss = FindObjectOfType<Boss>();
+        if (healthSlider == null) healthSlider = GetComponentInChildren<Slider>();
+
+        if (boss == null || healthSlider == null)
         {
-            Debug.LogError("Boss reference is not set in BossHealthUI.");
+            Debug.LogError("Boss or HealthSlider not assigned!");
+            enabled = false;
             return;
         }
 
-        // Устанавливаем максимальное значение здоровья босса в Slider
         healthSlider.maxValue = boss.maxHealth;
         healthSlider.value = boss.currentHealth;
     }
 
     void Update()
     {
-        // Обновляем значение Slider в зависимости от текущего здоровья босса
-        if (boss != null)
+        if (boss == null || healthSlider == null)
         {
-            healthSlider.value = boss.currentHealth;
+            enabled = false;
+            return;
         }
+        healthSlider.value = boss.currentHealth;
+    }
+
+    void OnDestroy()
+    {
+        // Отписываемся от событий, если они используются
     }
 }
