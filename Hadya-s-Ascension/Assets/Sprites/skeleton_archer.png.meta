@@ -1,64 +1,7 @@
 fileFormatVersion: 2
-guid: ba4e45028ada78d43a71ed6aeba4bddb
+guid: 7e8721defe42e06469197b11b9d10432
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 4277943340476644211
-    second: rightward-sprites_0
-  - first:
-      213: 5993395017987660235
-    second: rightward-sprites_1
-  - first:
-      213: -2285551142961862378
-    second: rightward-sprites_2
-  - first:
-      213: -188014509328966867
-    second: rightward-sprites_3
-  - first:
-      213: 7486068521859810679
-    second: rightward-sprites_4
-  - first:
-      213: -7931643058390363808
-    second: rightward-sprites_5
-  - first:
-      213: -8648599856356282431
-    second: rightward-sprites_6
-  - first:
-      213: -9103811283151690240
-    second: rightward-sprites_7
-  - first:
-      213: -1443918412769545217
-    second: rightward-sprites_8
-  - first:
-      213: 4955998469579950517
-    second: rightward-sprites_9
-  - first:
-      213: 3151005873521239992
-    second: rightward-sprites_10
-  - first:
-      213: 3645854032587702928
-    second: rightward-sprites_11
-  - first:
-      213: -5181433295978559989
-    second: rightward-sprites_12
-  - first:
-      213: 6367631874366867468
-    second: rightward-sprites_13
-  - first:
-      213: 5605006999710664043
-    second: rightward-sprites_14
-  - first:
-      213: -4966891098233818626
-    second: rightward-sprites_15
-  - first:
-      213: 8372853538337365049
-    second: rightward-sprites_16
-  - first:
-      213: -5011291076403020669
-    second: rightward-sprites_17
-  - first:
-      213: -3437651570227077303
-    second: rightward-sprites_18
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -138,19 +81,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -164,20 +94,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Server
+    buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -215,404 +132,417 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: rightward-sprites_0
+      name: skeleton_archer_0
       rect:
         serializedVersion: 2
-        x: 14
-        y: 3
-        width: 36
-        height: 59
+        x: 13
+        y: 4
+        width: 34
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 37bbb5a7dce4e5b30800000000000000
-      internalID: 4277943340476644211
+      spriteID: 06756db258fda584d96c044557d827c6
+      internalID: -631373191
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_1
+      name: skeleton_archer_1
       rect:
         serializedVersion: 2
-        x: 78
+        x: 77
         y: 3
-        width: 36
-        height: 59
+        width: 32
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bc910c5b301dc2350800000000000000
-      internalID: 5993395017987660235
+      spriteID: 7ac208609eb61fa45a43dd1caf677aa1
+      internalID: 2040923257
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_2
+      name: skeleton_archer_2
       rect:
         serializedVersion: 2
-        x: 142
+        x: 145
         y: 3
-        width: 36
-        height: 59
+        width: 27
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 61925c748571840e0800000000000000
-      internalID: -2285551142961862378
+      spriteID: 7b1d82cdc5846894897923ccd2660ad3
+      internalID: -499623750
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_3
+      name: skeleton_archer_3
       rect:
         serializedVersion: 2
-        x: 206
+        x: 209
         y: 3
-        width: 36
-        height: 59
+        width: 27
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d2bd3d6ccc9046df0800000000000000
-      internalID: -188014509328966867
+      spriteID: b97e49148e271a64294485d57afc6691
+      internalID: -1622519390
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_4
+      name: skeleton_archer_4
       rect:
         serializedVersion: 2
-        x: 269
+        x: 272
         y: 3
-        width: 38
-        height: 58
+        width: 28
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 77500b168abd3e760800000000000000
-      internalID: 7486068521859810679
+      spriteID: fdf2b65d07cc35f48883daa443a76dd1
+      internalID: -1786313545
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_5
+      name: skeleton_archer_5
       rect:
         serializedVersion: 2
-        x: 333
+        x: 335
         y: 3
-        width: 38
-        height: 58
+        width: 29
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 061137b79a42de190800000000000000
-      internalID: -7931643058390363808
+      spriteID: 9dc5a7c89a27418449982c93866e6d3d
+      internalID: 46808544
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_6
+      name: skeleton_archer_6
       rect:
         serializedVersion: 2
-        x: 397
+        x: 394
         y: 3
-        width: 38
-        height: 58
+        width: 34
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1cfa36db0400af780800000000000000
-      internalID: -8648599856356282431
+      spriteID: 1ff225660fda1b74db38282dbed6cd37
+      internalID: -1480795601
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_7
+      name: skeleton_archer_7
       rect:
         serializedVersion: 2
-        x: 461
+        x: 452
         y: 3
-        width: 38
-        height: 59
+        width: 40
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 006ec8d3fd3c8a180800000000000000
-      internalID: -9103811283151690240
+      spriteID: f0cce6fc0f824b4469dc8a786c672e85
+      internalID: -1553706933
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_8
+      name: skeleton_archer_8
       rect:
         serializedVersion: 2
-        x: 525
+        x: 516
         y: 3
-        width: 38
-        height: 59
+        width: 40
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ff3b9329adb26fbe0800000000000000
-      internalID: -1443918412769545217
+      spriteID: 0e62c4e624487a34481da7ea96b73cc0
+      internalID: 545834831
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_9
+      name: skeleton_archer_9
       rect:
         serializedVersion: 2
-        x: 590
+        x: 580
         y: 3
-        width: 36
-        height: 59
+        width: 40
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5b941be995e37c440800000000000000
-      internalID: 4955998469579950517
+      spriteID: a526aa77570bab2478cd272460eb0af5
+      internalID: -125645686
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_10
+      name: skeleton_archer_10
       rect:
         serializedVersion: 2
-        x: 654
+        x: 644
         y: 3
-        width: 36
-        height: 59
+        width: 40
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8b72760b52f9abb20800000000000000
-      internalID: 3151005873521239992
+      spriteID: e219c88a8657a6f448f5a345a936d376
+      internalID: -2141497696
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_11
+      name: skeleton_archer_11
       rect:
         serializedVersion: 2
-        x: 718
+        x: 708
         y: 3
-        width: 36
-        height: 59
+        width: 40
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 092c0531deca89230800000000000000
-      internalID: 3645854032587702928
+      spriteID: 0dbc83f2a86f067448767c318ae6b250
+      internalID: -1046802058
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_12
+      name: skeleton_archer_12
       rect:
         serializedVersion: 2
-        x: 782
+        x: 772
         y: 3
-        width: 36
-        height: 59
+        width: 40
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b0601d5aed9d718b0800000000000000
-      internalID: -5181433295978559989
+      spriteID: 3a4a200d89e6b694bbb402e1d9365c4b
+      internalID: 1077924437
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_13
+      name: skeleton_archer_13
       rect:
         serializedVersion: 2
-        x: 845
+        x: 836
         y: 3
-        width: 38
-        height: 58
+        width: 40
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c08871cd37f5e5850800000000000000
-      internalID: 6367631874366867468
+      spriteID: 325cd4de88b338841b999247c9d92d43
+      internalID: 398300566
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_14
+      name: skeleton_archer_14
       rect:
         serializedVersion: 2
-        x: 909
+        x: 900
         y: 3
-        width: 38
-        height: 58
+        width: 40
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b65055d6b2cf8cd40800000000000000
-      internalID: 5605006999710664043
+      spriteID: e4dc5eafd469d01449246e070063864b
+      internalID: -504427025
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_15
+      name: skeleton_archer_15
       rect:
         serializedVersion: 2
-        x: 973
+        x: 972
         y: 3
-        width: 38
-        height: 58
+        width: 32
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ef139b3acde021bb0800000000000000
-      internalID: -4966891098233818626
+      spriteID: 14bdc4830e967e6498a3cc3eb9d69cfc
+      internalID: -2137804325
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_16
+      name: skeleton_archer_16
       rect:
         serializedVersion: 2
-        x: 1037
+        x: 1036
         y: 3
-        width: 38
-        height: 59
+        width: 32
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 93c98fc8ee9523470800000000000000
-      internalID: 8372853538337365049
+      spriteID: 4c03f1a6e05588a4d8020dacb08e8cfd
+      internalID: 625175224
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_17
+      name: skeleton_archer_17
       rect:
         serializedVersion: 2
         x: 1101
         y: 3
-        width: 38
-        height: 59
+        width: 31
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 38cb9e42151547ab0800000000000000
-      internalID: -5011291076403020669
+      spriteID: 24688f164eb539847a5234111c1c9228
+      internalID: 136559692
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rightward-sprites_18
+      name: skeleton_archer_18
       rect:
         serializedVersion: 2
-        x: 1166
+        x: 1164
         y: 3
-        width: 36
-        height: 59
+        width: 32
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 94f1d0f3c120b40d0800000000000000
-      internalID: -3437651570227077303
+      spriteID: 12b7d3f0a502ebb4ca7cd6008089b0c4
+      internalID: -42629773
       vertices: []
       indices: 
       edges: []
@@ -620,7 +550,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -628,25 +558,25 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      rightward-sprites_0: 4277943340476644211
-      rightward-sprites_1: 5993395017987660235
-      rightward-sprites_10: 3151005873521239992
-      rightward-sprites_11: 3645854032587702928
-      rightward-sprites_12: -5181433295978559989
-      rightward-sprites_13: 6367631874366867468
-      rightward-sprites_14: 5605006999710664043
-      rightward-sprites_15: -4966891098233818626
-      rightward-sprites_16: 8372853538337365049
-      rightward-sprites_17: -5011291076403020669
-      rightward-sprites_18: -3437651570227077303
-      rightward-sprites_2: -2285551142961862378
-      rightward-sprites_3: -188014509328966867
-      rightward-sprites_4: 7486068521859810679
-      rightward-sprites_5: -7931643058390363808
-      rightward-sprites_6: -8648599856356282431
-      rightward-sprites_7: -9103811283151690240
-      rightward-sprites_8: -1443918412769545217
-      rightward-sprites_9: 4955998469579950517
+      skeleton_archer_0: -631373191
+      skeleton_archer_1: 2040923257
+      skeleton_archer_10: -2141497696
+      skeleton_archer_11: -1046802058
+      skeleton_archer_12: 1077924437
+      skeleton_archer_13: 398300566
+      skeleton_archer_14: -504427025
+      skeleton_archer_15: -2137804325
+      skeleton_archer_16: 625175224
+      skeleton_archer_17: 136559692
+      skeleton_archer_18: -42629773
+      skeleton_archer_2: -499623750
+      skeleton_archer_3: -1622519390
+      skeleton_archer_4: -1786313545
+      skeleton_archer_5: 46808544
+      skeleton_archer_6: -1480795601
+      skeleton_archer_7: -1553706933
+      skeleton_archer_8: 545834831
+      skeleton_archer_9: -125645686
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

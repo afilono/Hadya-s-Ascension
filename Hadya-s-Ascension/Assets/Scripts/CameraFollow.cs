@@ -8,6 +8,8 @@ public class CameraFollow : MonoBehaviour
 
     void LateUpdate()
     {
+        if (player == null) return;
+
         // Желаемая позиция камеры
         Vector3 desiredPosition = player.position + offset;
 

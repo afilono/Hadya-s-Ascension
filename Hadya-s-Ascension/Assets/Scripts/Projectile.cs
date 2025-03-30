@@ -2,50 +2,68 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed; // Скорость снаряда
-    public int damage; // Урон снаряда
-    public LayerMask whatIsSolid; // Слой для столкновений (стены и объекты)
+    public float speed; // Speed of the projectile
+    public int damage; // Damage of the projectile
+    public LayerMask whatIsSolid; // Layer for collisions (walls and objects)
+    public LayerMask playerLayer; // Player layer (to ignore collisions with the player)
 
-    private Vector2 moveDirection; // Направление движения снаряда
+    private Vector2 moveDirection; // Direction of the projectile
 
-    // Метод для установки направления снаряда
-    public void SetDirection(int movementDirection)
+    void Start()
     {
-        // В зависимости от направления движения игрока задаём направление снаряда
-        switch (movementDirection)
+        // Activate the projectile to make it visible
+        gameObject.SetActive(true);
+
+        // Convert the LayerMask to a layer index
+        int playerLayerIndex = LayerMaskToLayerIndex(playerLayer);
+
+        // Validate the layer indices
+        if (gameObject.layer >= 0 && gameObject.layer <= 31 && playerLayerIndex >= 0 && playerLayerIndex <= 31)
         {
-            case 1: // Вперёд (вверх)
-                moveDirection = Vector2.up;
-                break;
-            case 2: // Назад (вниз)
-                moveDirection = Vector2.down;
-                break;
-            case 3: // Влево
-                moveDirection = Vector2.left;
-                break;
-            case 4: // Вправо
-                moveDirection = Vector2.right;
-                break;
-            default: // Если игрок не двигается (например, стоит на месте)
-                moveDirection = Vector2.zero;
-                break;
+            // Ignore collisions with the player layer
+            Physics2D.IgnoreLayerCollision(gameObject.layer, playerLayerIndex);
         }
+        else
+        {
+            Debug.LogError("Invalid layer numbers. Layer numbers must be between 0 and 31.");
+        }
+    }
+
+    // Helper method to convert a LayerMask to a layer index
+    private int LayerMaskToLayerIndex(LayerMask mask)
+    {
+        int layerValue = mask.value;
+        if (layerValue == 0) return -1;
+        return (int)Mathf.Log(layerValue, 2);
+    }
+
+    // Method to set the direction of the projectile
+    public void SetDirection(Vector2 direction)
+    {
+        moveDirection = direction.normalized; // Normalize the direction
     }
 
     private void Update()
     {
-        // Проверка столкновения с объектами
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, moveDirection, Mathf.Infinity, whatIsSolid);
+        // Move the projectile
+        transform.Translate(moveDirection * speed * Time.deltaTime);
+
+        // Check for collisions with objects
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, moveDirection, speed * Time.deltaTime, whatIsSolid);
         if (hitInfo.collider != null)
         {
+            // Damage the enemy (EnemyController)
             if (hitInfo.collider.CompareTag("EnemyController"))
             {
                 hitInfo.collider.GetComponent<EnemyController>().TakeDamage(damage);
             }
-            Destroy(gameObject); // Уничтожаем снаряд после столкновения
-        }
+            // Damage the boss (Boss)
+            else if (hitInfo.collider.CompareTag("Boss"))
+            {
+                hitInfo.collider.GetComponent<Boss>().TakeDamage(damage);
+            }
 
-        // Перемещение снаряда
-        transform.Translate(moveDirection * speed * Time.deltaTime);
+            Destroy(gameObject); // Destroy the projectile after collision
+        }
     }
 }

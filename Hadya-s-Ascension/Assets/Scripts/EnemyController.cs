@@ -13,6 +13,9 @@ public class EnemyController : MonoBehaviour
     private bool isDead = false;
     private float lastAttackTime = 0f;
 
+    public delegate void EnemyDeathHandler(EnemyController enemy);
+    public static event EnemyDeathHandler OnEnemyDeath;
+
     void Update()
     {
         if (isDead || target == null) return;
@@ -31,11 +34,18 @@ public class EnemyController : MonoBehaviour
 
     void MoveTowardsTarget()
     {
+        if (target == null) return;
+
         // Направление движения
         Vector3 direction = (target.position - transform.position).normalized;
 
-        // Движение в сторону цели
-        transform.position += direction * speed * Time.deltaTime;
+        // Проверка на наличие стены перед врагом
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, speed * Time.deltaTime, LayerMask.GetMask("Wall"));
+        if (hit.collider == null)
+        {
+            // Движение в сторону цели
+            transform.position += direction * speed * Time.deltaTime;
+        }
     }
 
     void Attack()
@@ -73,6 +83,15 @@ public class EnemyController : MonoBehaviour
         isDead = true;
         Debug.Log("Враг погиб!");
         Destroy(gameObject); // Уничтожить объект врага
+        if (isDead) return;
+
+        isDead = true;
+
+        // Уведомляем о смерти
+        OnEnemyDeath?.Invoke(this);
+
+
+        Destroy(gameObject);
     }
 
     void OnDrawGizmosSelected()
@@ -80,5 +99,9 @@ public class EnemyController : MonoBehaviour
         // Отображение радиуса атаки в редакторе
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    void Start()
+    {
     }
 }
