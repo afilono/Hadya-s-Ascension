@@ -31,10 +31,17 @@ public class BossHealthUI : MonoBehaviour
             return;
         }
         healthSlider.value = boss.currentHealth;
+        if (boss.currentHealth < 0)
+            HideHealthBar();
     }
-
-    void OnDestroy()
+    void HideHealthBar()
     {
-        // Отписываемся от событий, если они используются
+        if (healthSlider != null)
+        { 
+            healthSlider.gameObject.SetActive(false);
+        }
+    }
+    private void OnDestroy()
+    {
     }
 }

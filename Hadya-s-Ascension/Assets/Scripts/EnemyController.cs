@@ -13,6 +13,9 @@ public class EnemyController : MonoBehaviour
     private bool isDead = false;
     private float lastAttackTime = 0f;
 
+    public delegate void EnemyDeathHandler(EnemyController enemy);
+    public static event EnemyDeathHandler OnEnemyDeath;
+
     void Update()
     {
         if (isDead || target == null) return;
@@ -80,6 +83,15 @@ public class EnemyController : MonoBehaviour
         isDead = true;
         Debug.Log("Враг погиб!");
         Destroy(gameObject); // Уничтожить объект врага
+        if (isDead) return;
+
+        isDead = true;
+
+        // Уведомляем о смерти
+        OnEnemyDeath?.Invoke(this);
+
+
+        Destroy(gameObject);
     }
 
     void OnDrawGizmosSelected()
@@ -87,5 +99,9 @@ public class EnemyController : MonoBehaviour
         // Отображение радиуса атаки в редакторе
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    void Start()
+    {
     }
 }
