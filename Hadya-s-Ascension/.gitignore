@@ -24,7 +24,6 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
-*.vsconfig
 
 *.apk
 *.aab
@@ -34,10 +33,3 @@ ExportedObj/
 /[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 
 /[Aa]ssets/Plugins/Editor/JetBrains*
-# Asset meta data should only be ignored when the corresponding asset is also ignored
-!/[Aa]ssets/**/*.meta
-
-# Unity3D generated meta files
-*.pidb.meta
-*.pdb.meta
-*.mdb.meta
