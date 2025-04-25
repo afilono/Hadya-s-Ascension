@@ -1,20 +1,38 @@
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IDamageable
 {
     [Header("Enemy Settings")]
-    public float health = 50f; // Здоровье врага
-    public float speed = 2f;   // Скорость перемещения врага
-    public float attackRange = 1.5f; // Радиус атаки
-    public float attackCooldown = 2f; // Время между атаками
-    public int attackDamage = 10; // Урон врага
-    public Transform target;   // Цель, например, игрок
+    [SerializeField] private float maxHealth = 50f;
+    [SerializeField] private float speed = 2f;
+    [SerializeField] private float attackRange = 1.5f;
+    [SerializeField] private float attackCooldown = 2f;
+    [SerializeField] private int attackDamage = 10;
+    [SerializeField] private Transform target;
 
+    private float currentHealth;
     private bool isDead = false;
     private float lastAttackTime = 0f;
 
+    public float Health => currentHealth;
+
     public delegate void EnemyDeathHandler(EnemyController enemy);
     public static event EnemyDeathHandler OnEnemyDeath;
+
+    void Start()
+    {
+        currentHealth = maxHealth;
+        
+        // Если цель не задана, ищем игрока
+        if (target == null)
+        {
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            if (playerObject != null)
+            {
+                target = playerObject.transform;
+            }
+        }
+    }
 
     void Update()
     {
@@ -52,44 +70,48 @@ public class EnemyController : MonoBehaviour
     {
         if (Time.time - lastAttackTime >= attackCooldown)
         {
-            // Логика атаки
             lastAttackTime = Time.time;
             Debug.Log("Враг атакует!");
 
-            // Проверяем наличие компонента здоровья у цели
-            if (target.TryGetComponent<PlayerController>(out PlayerController player))
+            // Проверяем наличие компонента IDamageable или HealthSystem у цели
+            IDamageable damageable = target.GetComponent<IDamageable>();
+            if (damageable != null)
             {
-                player.TakeDamage(attackDamage); // Наносим урон игроку
+                damageable.TakeDamage(attackDamage);
+            }
+            else
+            {
+                // Если интерфейс не найден, можно попробовать найти HealthSystem напрямую
+                HealthSystem healthSystem = target.GetComponent<HealthSystem>();
+                if (healthSystem != null)
+                {
+                    healthSystem.TakeDamage(attackDamage);
+                }
             }
         }
     }
 
     public void TakeDamage(float damage)
     {
-        if (isDead) return; // Если враг уже мертв, игнорируем урон
+        if (isDead) return;
 
-        health -= damage;
+        currentHealth -= damage;
 
-        if (health <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
     }
 
-    void Die()
+    public void Die()
     {
         if (isDead) return;
 
         isDead = true;
         Debug.Log("Враг погиб!");
-        Destroy(gameObject); // Уничтожить объект врага
-        if (isDead) return;
-
-        isDead = true;
-
+        
         // Уведомляем о смерти
         OnEnemyDeath?.Invoke(this);
-
 
         Destroy(gameObject);
     }
@@ -99,9 +121,5 @@ public class EnemyController : MonoBehaviour
         // Отображение радиуса атаки в редакторе
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
-
-    void Start()
-    {
     }
 }

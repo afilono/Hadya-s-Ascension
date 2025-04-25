@@ -3,31 +3,43 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
     public Transform door1;
-    public Transform door2;// Ссылка на объект двери (Transform)
-    public Vector3 closedPosition1; // Позиция закрытой двери
+    public Transform door2;
+    public Vector3 closedPosition1;
     public Vector3 openPosition1;
     public Vector3 closePosition2;
     public Vector3 openPosition2;
-    public EnemyController[] enemies; // Массив врагов в комнате
+    
+    [Header("Room Settings")]
+    [SerializeField] private bool refreshEnemiesOnUpdate = false;
+    private EnemyController[] enemies;
     private bool isPlayerInside = false;
 
     void Start()
     {
         door1.position = openPosition1;
         door2.position = openPosition2;
-        enemies = enemyControllers();
+        RefreshEnemiesList();
     }
 
     void Update()
     {
-        // Проверяем, есть ли враги в комнате
-        if (isPlayerInside && AreAllEnemiesDefeated())
+        // При необходимости обновляем список врагов (опционально)
+        if (refreshEnemiesOnUpdate)
         {
-            OpenDoor();
+            RefreshEnemiesList();
         }
-        if (isPlayerInside && !AreAllEnemiesDefeated())
+        
+        // Проверяем, есть ли враги в комнате
+        if (isPlayerInside)
         {
-            CloseDoor();
+            if (AreAllEnemiesDefeated())
+            {
+                OpenDoor();
+            }
+            else
+            {
+                CloseDoor();
+            }
         }
     }
 
@@ -36,6 +48,8 @@ public class RoomManager : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInside = true;
+            // Обновляем список врагов при входе игрока
+            RefreshEnemiesList();
         }
     }
 
@@ -58,19 +72,37 @@ public class RoomManager : MonoBehaviour
         door1.position = openPosition1;
         door2.position = openPosition2;
     }
-    private EnemyController[] enemyControllers()
+    
+    private void RefreshEnemiesList()
     {
-        return Collider2D.FindObjectsOfType<EnemyController>();
+        enemies = FindEnemiesInRoom();
     }
+    
+    private EnemyController[] FindEnemiesInRoom()
+    {
+        // Найти всех врагов в пределах данной комнаты
+        // Для более точного определения можно использовать коллайдер комнаты
+        // и проверять, находятся ли враги внутри него
+        
+        // Простой вариант - найти всех врагов на сцене
+        return FindObjectsOfType<EnemyController>();
+    }
+    
     private bool AreAllEnemiesDefeated()
     {
+        bool allDefeated = true;
+        
+        // Проверяем все найденные экземпляры врагов
         foreach (EnemyController enemy in enemies)
         {
-            if (enemy.health > 0) // Проверяем, жив ли враг
+            // Проверяем существование объекта и его здоровье
+            if (enemy != null && enemy.Health > 0)
             {
-                return false; // Если хотя бы один враг жив, возвращаем false
+                allDefeated = false;
+                break;
             }
         }
-        return true; // Все враги убиты
+        
+        return allDefeated;
     }
 }

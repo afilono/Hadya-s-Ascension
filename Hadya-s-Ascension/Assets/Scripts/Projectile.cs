@@ -2,68 +2,154 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed; // Speed of the projectile
-    public int damage; // Damage of the projectile
-    public LayerMask whatIsSolid; // Layer for collisions (walls and objects)
-    public LayerMask playerLayer; // Player layer (to ignore collisions with the player)
+    public float speed = 10f;
+    public int damage = 10;
+    public float lifetime = 5f;
+    public LayerMask whatIsSolid;
+    public LayerMask playerLayer;
+    
+    [Header("Visual Effects")]
+    [SerializeField] private GameObject hitEffect;
+    
+    private Vector2 moveDirection;
+    private float timeSinceSpawn = 0f;
+    private Rigidbody2D rb;
 
-    private Vector2 moveDirection; // Direction of the projectile
+    void Awake()
+    {
+        // Получаем компонент Rigidbody2D, если он есть
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void Start()
     {
-        // Activate the projectile to make it visible
-        gameObject.SetActive(true);
-
-        // Convert the LayerMask to a layer index
+        // Игнорируем коллизии с игроком
+        int projectileLayer = gameObject.layer;
         int playerLayerIndex = LayerMaskToLayerIndex(playerLayer);
-
-        // Validate the layer indices
-        if (gameObject.layer >= 0 && gameObject.layer <= 31 && playerLayerIndex >= 0 && playerLayerIndex <= 31)
+        
+        if (playerLayerIndex >= 0)
         {
-            // Ignore collisions with the player layer
-            Physics2D.IgnoreLayerCollision(gameObject.layer, playerLayerIndex);
-        }
-        else
-        {
-            Debug.LogError("Invalid layer numbers. Layer numbers must be between 0 and 31.");
+            Physics2D.IgnoreLayerCollision(projectileLayer, playerLayerIndex, true);
         }
     }
 
-    // Helper method to convert a LayerMask to a layer index
+    void Update()
+    {
+        // Если снаряд использует Rigidbody2D, движение обрабатывается через него
+        if (rb == null)
+        {
+            // Если Rigidbody2D нет, двигаем через Transform
+            transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
+        }
+        
+        // Проверяем столкновения через райкаст
+        CheckCollisions();
+        
+        // Уничтожаем снаряд по истечении времени жизни
+        timeSinceSpawn += Time.deltaTime;
+        if (timeSinceSpawn >= lifetime)
+        {
+            Destroy(gameObject);
+        }
+    }
+    
+    // Устанавливает направление движения снаряда
+    public void SetDirection(Vector2 direction)
+    {
+        moveDirection = direction.normalized;
+        
+        // Если есть Rigidbody2D, используем его для движения
+        if (rb != null)
+        {
+            // Используем velocity вместо AddForce для постоянной скорости
+            rb.velocity = moveDirection * speed;
+            
+            // Отключаем гравитацию для снаряда
+            rb.gravityScale = 0;
+        }
+        
+        // Поворачиваем снаряд в направлении движения
+        if (moveDirection != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+    }
+    
+    private void CheckCollisions()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, moveDirection, speed * Time.deltaTime, whatIsSolid);
+        
+        if (hit.collider != null)
+        {
+            HandleCollision(hit.collider, hit.point);
+        }
+    }
+    
+    private void HandleCollision(Collider2D collider, Vector2 hitPoint)
+    {
+        // Проверяем на компонент IDamageable
+        IDamageable damageable = collider.GetComponent<IDamageable>();
+        if (damageable != null)
+        {
+            damageable.TakeDamage(damage);
+        }
+        else
+        {
+            // Альтернативные проверки на старые компоненты
+            EnemyController enemy = collider.GetComponent<EnemyController>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
+        }
+        
+        // Создаем эффект при попадании
+        if (hitEffect != null)
+        {
+            Instantiate(hitEffect, hitPoint, Quaternion.identity);
+        }
+        
+        // Уничтожаем снаряд
+        Destroy(gameObject);
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // Игнорируем игрока
+        if (((1 << other.gameObject.layer) & playerLayer) != 0)
+        {
+            return;
+        }
+        
+        // Обрабатываем столкновение через триггер
+        HandleCollision(other, transform.position);
+    }
+    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Игнорируем игрока
+        if (((1 << collision.gameObject.layer) & playerLayer) != 0)
+        {
+            return;
+        }
+        
+        // Обрабатываем физическое столкновение
+        HandleCollision(collision.collider, collision.GetContact(0).point);
+    }
+
+    // Вспомогательный метод для преобразования LayerMask в индекс слоя
     private int LayerMaskToLayerIndex(LayerMask mask)
     {
         int layerValue = mask.value;
         if (layerValue == 0) return -1;
-        return (int)Mathf.Log(layerValue, 2);
-    }
-
-    // Method to set the direction of the projectile
-    public void SetDirection(Vector2 direction)
-    {
-        moveDirection = direction.normalized; // Normalize the direction
-    }
-
-    private void Update()
-    {
-        // Move the projectile
-        transform.Translate(moveDirection * speed * Time.deltaTime);
-
-        // Check for collisions with objects
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, moveDirection, speed * Time.deltaTime, whatIsSolid);
-        if (hitInfo.collider != null)
+        
+        for (int i = 0; i < 32; i++)
         {
-            // Damage the enemy (EnemyController)
-            if (hitInfo.collider.CompareTag("EnemyController"))
-            {
-                hitInfo.collider.GetComponent<EnemyController>().TakeDamage(damage);
-            }
-            // Damage the boss (Boss)
-            else if (hitInfo.collider.CompareTag("Boss"))
-            {
-                hitInfo.collider.GetComponent<Boss>().TakeDamage(damage);
-            }
-
-            Destroy(gameObject); // Destroy the projectile after collision
+            if ((layerValue & (1 << i)) != 0)
+                return i;
         }
+        
+        return -1;
     }
 }

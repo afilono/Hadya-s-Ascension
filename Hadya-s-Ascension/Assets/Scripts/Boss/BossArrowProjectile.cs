@@ -23,9 +23,24 @@ public class BossArrowProjectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && other.TryGetComponent<PlayerController>(out PlayerController player))
+        if (other.CompareTag("Player"))
         {
-            player.TakeDamage(damage);
+            // Ищем компонент IDamageable вместо PlayerController
+            IDamageable damageable = other.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.TakeDamage(damage);
+            }
+            else
+            {
+                // Если интерфейс не найден, можно попробовать найти HealthSystem напрямую
+                HealthSystem healthSystem = other.GetComponent<HealthSystem>();
+                if (healthSystem != null)
+                {
+                    healthSystem.TakeDamage(damage);
+                }
+            }
+            
             Destroy(gameObject);
         }
         else if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
