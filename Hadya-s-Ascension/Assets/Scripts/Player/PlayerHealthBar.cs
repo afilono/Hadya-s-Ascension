@@ -1,27 +1,54 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider slider; // Ссылка на UI Slider
-    public Image fillImage; // Ссылка на Image, который заполняет полоску здоровья
-    public Gradient gradient; // Градиент для изменения цвета полоски здоровья
+    public Image fillImage;
+    public Gradient gradient;
+    private float maxHealth;
+    private float currentHealth;
 
+    /// <summary>
+    /// Устанавливает максимальное здоровье и инициализирует текущий уровень здоровья
+    /// </summary>
     public void SetMaxHealth(float health)
     {
-        slider.maxValue = health; // Устанавливаем максимальное значение здоровья
-        slider.value = health; // Устанавливаем текущее значение здоровья
-
-        // Устанавливаем начальный цвет полоски здоровья в соответствии с градиентом
-        fillImage.color = gradient.Evaluate(1f); // 1f соответствует максимальному здоровью
+        maxHealth = health;
+        currentHealth = health;
+        UpdateHealthBar(1f);
     }
 
+    /// <summary>
+    /// Плавно изменяет здоровье с помощью корутины
+    /// </summary>
     public void SetHealth(float health)
     {
-        slider.value = health; // Обновляем текущее значение здоровья
+        StopAllCoroutines();
+        StartCoroutine(ChangeHealthSmoothly(health));
+    }
 
-        // Вычисляем процент здоровья и изменяем цвет полоски в соответствии с градиентом
-        float healthPercentage = health / slider.maxValue;
+    private IEnumerator ChangeHealthSmoothly(float targetHealth)
+    {
+        float startHealth = currentHealth;
+        float elapsed = 0f;
+        float duration = 0.5f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            currentHealth = Mathf.Lerp(startHealth, targetHealth, elapsed / duration);
+            UpdateHealthBar(currentHealth / maxHealth);
+            yield return null;
+        }
+
+        currentHealth = targetHealth;
+        UpdateHealthBar(currentHealth / maxHealth);
+    }
+
+    private void UpdateHealthBar(float healthPercentage)
+    {
+        fillImage.fillAmount = healthPercentage;
         fillImage.color = gradient.Evaluate(healthPercentage);
     }
 }
