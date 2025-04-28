@@ -13,7 +13,8 @@ public class EnemyController : MonoBehaviour, IDamageable
     private float currentHealth;
     private bool isDead = false;
     private float lastAttackTime = 0f;
-
+    private IRoomState currentRoom;
+    
     public float Health => currentHealth;
 
     public delegate void EnemyDeathHandler(EnemyController enemy);
@@ -106,13 +107,13 @@ public class EnemyController : MonoBehaviour, IDamageable
     public void Die()
     {
         if (isDead) return;
-
+    
         isDead = true;
         Debug.Log("Враг погиб!");
-        
+    
         // Уведомляем о смерти
         OnEnemyDeath?.Invoke(this);
-
+    
         Destroy(gameObject);
     }
 
@@ -121,5 +122,10 @@ public class EnemyController : MonoBehaviour, IDamageable
         // Отображение радиуса атаки в редакторе
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+    
+    public void SetCurrentRoom(IRoomState room)
+    {
+        currentRoom = room;
     }
 }

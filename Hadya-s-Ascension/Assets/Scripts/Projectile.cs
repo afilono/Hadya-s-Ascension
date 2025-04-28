@@ -121,11 +121,17 @@ public class Projectile : MonoBehaviour
         {
             return;
         }
-        
+    
+        // Игнорируем объекты, не находящиеся на слоях whatIsSolid
+        if (((1 << other.gameObject.layer) & whatIsSolid) == 0)
+        {
+            return;
+        }
+    
         // Обрабатываем столкновение через триггер
         HandleCollision(other, transform.position);
     }
-    
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Игнорируем игрока
@@ -133,7 +139,13 @@ public class Projectile : MonoBehaviour
         {
             return;
         }
-        
+    
+        // Игнорируем объекты, не находящиеся на слоях whatIsSolid
+        if (((1 << collision.gameObject.layer) & whatIsSolid) == 0)
+        {
+            return;
+        }
+    
         // Обрабатываем физическое столкновение
         HandleCollision(collision.collider, collision.GetContact(0).point);
     }
