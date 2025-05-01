@@ -1,28 +1,25 @@
+using System;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour, IDamageable
+public class EnemyController :  Enemy
 {
-    [Header("Enemy Settings")]
-    [SerializeField] private float maxHealth = 50f;
+    [Header("Настройки атаки")]
     [SerializeField] private float speed = 2f;
     [SerializeField] private float attackRange = 1.5f;
     [SerializeField] private float attackCooldown = 2f;
     [SerializeField] private int attackDamage = 10;
     [SerializeField] private Transform target;
 
-    private float currentHealth;
-    private bool isDead = false;
     private float lastAttackTime = 0f;
     private IRoomState currentRoom;
     
-    public float Health => currentHealth;
-
+    // Сохраняем для обратной совместимости
     public delegate void EnemyDeathHandler(EnemyController enemy);
-    public event EnemyDeathHandler OnEnemyDeath;
+    public event EnemyDeathHandler OnEnemyDeathLegacy;
 
-    void Start()
+    protected override void Start()
     {
-        currentHealth = maxHealth;
+        base.Start();
         
         // Если цель не задана, ищем игрока
         if (target == null)
@@ -104,16 +101,16 @@ public class EnemyController : MonoBehaviour, IDamageable
         }
     }
 
-    public void Die()
+    public override void Die()
     {
         if (isDead) return;
-    
+        
         isDead = true;
         Debug.Log("Враг погиб!");
-    
-        // Уведомляем о смерти
+        
+        OnEnemyDeathLegacy?.Invoke(this);
         OnEnemyDeath?.Invoke(this);
-    
+        
         Destroy(gameObject);
     }
 

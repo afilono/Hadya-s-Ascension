@@ -12,7 +12,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private bool lockRoomOnEnter = true;
     
     [Header("Враги")]
-    [SerializeField] private List<EnemyController> roomEnemies = new List<EnemyController>();
+    [SerializeField] private List<Enemy> roomEnemies = new List<Enemy>();
     
     // События комнаты
     public event Action OnPlayerEnterRoom;
@@ -44,7 +44,7 @@ public class RoomManager : MonoBehaviour
         roomEnemies.RemoveAll(e => e == null);
         
         // Подписываемся на события смерти для каждого врага
-        foreach (EnemyController enemy in roomEnemies)
+        foreach (Enemy enemy in roomEnemies)
         {
             if (enemy != null)
             {
@@ -173,10 +173,7 @@ public class RoomManager : MonoBehaviour
         return nearest;
     }
     
-    /// <summary>
-    /// Добавить врага в список врагов комнаты
-    /// </summary>
-    public void AddEnemy(EnemyController enemy)
+    public void AddEnemy(Enemy enemy)
     {
         if (enemy != null && !roomEnemies.Contains(enemy))
         {
@@ -186,10 +183,7 @@ public class RoomManager : MonoBehaviour
         }
     }
     
-    /// <summary>
-    /// Удалить врага из списка врагов комнаты
-    /// </summary>
-    public void RemoveEnemy(EnemyController enemy)
+    public void RemoveEnemy(Enemy enemy)
     {
         if (enemy != null && roomEnemies.Contains(enemy))
         {
@@ -214,15 +208,14 @@ public class RoomManager : MonoBehaviour
     /// </summary>
     public bool AreAllEnemiesDefeated()
     {
-        // Очищаем null-ссылки
         roomEnemies.RemoveAll(e => e == null);
         
         if (roomEnemies.Count == 0)
             return true;
             
-        foreach (EnemyController enemy in roomEnemies)
+        foreach (Enemy enemy in roomEnemies)
         {
-            if (enemy != null && enemy.Health > 0)
+            if (enemy != null && !enemy.IsDead() && enemy.Health > 0)
                 return false;
         }
         
@@ -232,17 +225,15 @@ public class RoomManager : MonoBehaviour
     /// <summary>
     /// Обработчик события смерти врага
     /// </summary>
-    private void HandleEnemyDeath(EnemyController deadEnemy)
+    private void HandleEnemyDeath(Enemy deadEnemy)
     {
         if (roomEnemies.Contains(deadEnemy))
         {
             roomEnemies.Remove(deadEnemy);
             Debug.Log($"Враг уничтожен. Осталось врагов: {roomEnemies.Count}");
             
-            // Вызываем событие, если все враги уничтожены
             if (roomEnemies.Count == 0)
             {
-                Debug.Log("Все враги уничтожены, вызываем событие");
                 OnAllEnemiesDefeated?.Invoke();
                 if(waveSpawner == null)
                     OpenDoors();
@@ -252,10 +243,9 @@ public class RoomManager : MonoBehaviour
     
     private void OnDestroy()
     {
-        // Безопасное отписывание от событий
-        List<EnemyController> enemiesCopy = new List<EnemyController>(roomEnemies);
+        List<Enemy> enemiesCopy = new List<Enemy>(roomEnemies);
         
-        foreach (EnemyController enemy in enemiesCopy)
+        foreach (Enemy enemy in enemiesCopy)
         {
             if (enemy != null)
             {

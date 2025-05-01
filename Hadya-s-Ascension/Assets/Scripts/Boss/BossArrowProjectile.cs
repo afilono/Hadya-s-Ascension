@@ -5,6 +5,19 @@ public class BossArrowProjectile : MonoBehaviour
     private Vector2 direction;
     private float speed;
     private int damage;
+    private Rigidbody2D rb;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            rb = gameObject.AddComponent<Rigidbody2D>();
+        }
+        rb.gravityScale = 0f;
+        rb.freezeRotation = true;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
 
     public void Initialize(Vector2 shootDirection, float projectileSpeed, int projectileDamage)
     {
@@ -12,13 +25,14 @@ public class BossArrowProjectile : MonoBehaviour
         speed = projectileSpeed;
         damage = projectileDamage;
 
+        // Установка правильной начальной ориентации
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        transform.Translate(direction * speed * Time.deltaTime, Space.World);
+        rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
     }
 
     void OnTriggerEnter2D(Collider2D other)

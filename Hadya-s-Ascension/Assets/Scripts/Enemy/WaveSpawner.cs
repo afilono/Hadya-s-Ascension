@@ -133,10 +133,10 @@ public class WaveSpawner : MonoBehaviour
             GameObject enemy = Instantiate(enemyType.enemyPrefab, spawnPoint.position, Quaternion.identity);
             spawnedEnemies.Add(enemy);
 
-            EnemyController enemyController = enemy.GetComponent<EnemyController>();
-            if (enemyController != null && roomManager != null)
+            Enemy enemyComponent = enemy.GetComponent<Enemy>();
+            if (enemyComponent != null && roomManager != null)
             {
-                roomManager.AddEnemy(enemyController);
+                roomManager.AddEnemy(enemyComponent);
             }
 
             yield return new WaitForSeconds(enemyType.delayAfterSpawn);
