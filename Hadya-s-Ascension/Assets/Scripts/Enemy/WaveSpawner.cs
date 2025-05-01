@@ -39,6 +39,7 @@ public class WaveSpawner : MonoBehaviour
     private bool hasPlayerEnteredRoom = false;
     private Coroutine spawnCoroutine;
     private bool isWaitingForNextWave = false;
+    private bool allWavesCompleted = false; // Новый флаг для отслеживания завершения всех волн
 
     private void Start()
     {
@@ -71,7 +72,8 @@ public class WaveSpawner : MonoBehaviour
         Debug.Log("Игрок вошел в комнату (WaveSpawner)");
         hasPlayerEnteredRoom = true;
         
-        if (autoStart && !isSpawning && HasWaves())
+        // Не начинаем спавн, если все волны уже были завершены
+        if (autoStart && !isSpawning && HasWaves() && !allWavesCompleted)
         {
             StartWaveSpawning();
         }
@@ -91,12 +93,14 @@ public class WaveSpawner : MonoBehaviour
 
     public bool HasWaves()
     {
-        return waves != null && waves.Length > 0;
+        // Проверяем не только наличие волн, но и то, что они ещё не были завершены
+        return waves != null && waves.Length > 0 && !allWavesCompleted;
     }
 
     public void StartWaveSpawning()
     {
-        if (!isSpawning && hasPlayerEnteredRoom)
+        // Не начинаем спавн, если все волны уже были завершены
+        if (!isSpawning && hasPlayerEnteredRoom && !allWavesCompleted)
         {
             Debug.Log("Начинаем спавн волн");
             isSpawning = true;
@@ -111,6 +115,7 @@ public class WaveSpawner : MonoBehaviour
         {
             Debug.Log("Все волны завершены!");
             isSpawning = false;
+            allWavesCompleted = true; // Отмечаем, что все волны завершены
             if (roomManager != null)
             {
                 roomManager.OpenDoors();
@@ -212,6 +217,7 @@ public class WaveSpawner : MonoBehaviour
         {
             Debug.Log("Все волны завершены!");
             isSpawning = false;
+            allWavesCompleted = true; // Отмечаем, что все волны завершены
             
             // Открываем двери после завершения всех волн
             if (roomManager != null)
