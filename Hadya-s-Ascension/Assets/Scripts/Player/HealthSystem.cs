@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class HealthSystem : MonoBehaviour, IDamageable
 {
     [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private StatusEffectFlash statusEffectFlash;
     private float currentHealth;
     
     public HealthBar healthBar;
@@ -24,11 +26,13 @@ public class HealthSystem : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-
+        
         if (healthBar != null)
         {
             healthBar.SetHealth(currentHealth);
         }
+        
+        statusEffectFlash?.Flash();
 
         if (currentHealth <= 0)
         {
@@ -39,6 +43,8 @@ public class HealthSystem : MonoBehaviour, IDamageable
     public void AddHp(float health)
     {
         currentHealth += Mathf.Clamp(health, 0, maxHealth);
+        
+        statusEffectFlash?.FlashHealing();
 
         if (healthBar != null)
         {

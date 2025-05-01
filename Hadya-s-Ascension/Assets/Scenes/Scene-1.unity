@@ -679,7 +679,7 @@ MonoBehaviour:
   doors:
   - {fileID: 1736800499}
   - {fileID: 2026378680}
-  safeDistanceFromDoor: 2
+  safeDistanceFromDoor: 1
   lockRoomOnEnter: 1
   roomEnemies:
   - {fileID: 600828951}
@@ -2262,10 +2262,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Doors
       objectReference: {fileID: 0}
-    - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 3020501115725687544, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -2823,7 +2819,6 @@ GameObject:
   - component: {fileID: 117862916}
   - component: {fileID: 117862915}
   - component: {fileID: 117862914}
-  - component: {fileID: 117862919}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2915,51 +2910,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &117862919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 117862913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cebf30b2e40dc8e43b11653b67fbdeb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fillImage: {fileID: 2005889593}
-  gradient:
-    serializedVersion: 2
-    key0: {r: 0.94117653, g: 0.14901961, b: 0.14901961, a: 1}
-    key1: {r: 0.94117653, g: 0.14901961, b: 0.14901961, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_ColorSpace: -1
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  healthText: {fileID: 1746509095}
-  boss: {fileID: 940051705}
 --- !u!1 &121960861
 GameObject:
   m_ObjectHideFlags: 0
@@ -5654,10 +5604,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Doors
       objectReference: {fileID: 0}
-    - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 3020501115725687544, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -7868,10 +7814,6 @@ PrefabInstance:
     - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_Name
       value: Doors
-      objectReference: {fileID: 0}
-    - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3020501115725687544, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_LocalScale.x
@@ -14785,7 +14727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: bcdcf810e9e47d9439596c72314602b0, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: bcdcf810e9e47d9439596c72314602b0, type: 3}
       propertyPath: m_TagString
@@ -15626,10 +15568,6 @@ PrefabInstance:
     - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_Name
       value: Doors
-      objectReference: {fileID: 0}
-    - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3020501115725687544, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_LocalScale.x
@@ -16765,10 +16703,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Doors
       objectReference: {fileID: 0}
-    - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 3020501115725687544, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -16935,7 +16869,7 @@ MonoBehaviour:
   doors:
   - {fileID: 409742740}
   - {fileID: 170459297}
-  safeDistanceFromDoor: 2
+  safeDistanceFromDoor: 1
   lockRoomOnEnter: 1
   roomEnemies: []
 --- !u!1 &658676860
@@ -17289,7 +17223,7 @@ MonoBehaviour:
   doors:
   - {fileID: 946049290}
   - {fileID: 651587280}
-  safeDistanceFromDoor: 2
+  safeDistanceFromDoor: 1
   lockRoomOnEnter: 1
   roomEnemies: []
 --- !u!61 &671064592
@@ -19102,10 +19036,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Doors
       objectReference: {fileID: 0}
-    - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 3020501115725687544, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -19952,7 +19882,7 @@ MonoBehaviour:
   doors:
   - {fileID: 1584861237}
   - {fileID: 1461911143}
-  safeDistanceFromDoor: 2
+  safeDistanceFromDoor: 1
   lockRoomOnEnter: 1
   roomEnemies:
   - {fileID: 1847388173}
@@ -21029,7 +20959,7 @@ GameObject:
   - component: {fileID: 940051706}
   - component: {fileID: 940051705}
   - component: {fileID: 940051703}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: Skeleton
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -25038,6 +24968,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1072264812}
+  - component: {fileID: 1072264813}
   m_Layer: 5
   m_Name: BosHPBar
   m_TagString: Untagged
@@ -25067,6 +24998,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -490}
   m_SizeDelta: {x: 811.42, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1072264813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072264811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cebf30b2e40dc8e43b11653b67fbdeb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillImage: {fileID: 2005889593}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 0.94117653, g: 0.14901961, b: 0.14901961, a: 1}
+    key1: {r: 0.94117653, g: 0.14901961, b: 0.14901961, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  healthText: {fileID: 1746509095}
+  boss: {fileID: 940051705}
 --- !u!1 &1074362414
 GameObject:
   m_ObjectHideFlags: 0
@@ -26385,7 +26361,7 @@ MonoBehaviour:
   doors:
   - {fileID: 1071896399}
   - {fileID: 1042383656}
-  safeDistanceFromDoor: 2
+  safeDistanceFromDoor: 1
   lockRoomOnEnter: 1
   roomEnemies: []
 --- !u!61 &1132095644
@@ -28492,10 +28468,6 @@ PrefabInstance:
     - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_Name
       value: Doors
-      objectReference: {fileID: 0}
-    - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3020501115725687544, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_LocalScale.x
@@ -35167,10 +35139,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Doors
       objectReference: {fileID: 0}
-    - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 3020501115725687544, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -39139,10 +39107,6 @@ PrefabInstance:
     - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_Name
       value: Doors
-      objectReference: {fileID: 0}
-    - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3020501115725687544, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_LocalScale.x
@@ -59712,10 +59676,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Doors
       objectReference: {fileID: 0}
-    - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 3020501115725687544, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -61300,10 +61260,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Doors
       objectReference: {fileID: 0}
-    - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 3020501115725687544, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -62318,7 +62274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: bcdcf810e9e47d9439596c72314602b0, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: bcdcf810e9e47d9439596c72314602b0, type: 3}
       propertyPath: m_TagString
@@ -63986,7 +63942,7 @@ MonoBehaviour:
   doors:
   - {fileID: 565093947}
   - {fileID: 1561848150}
-  safeDistanceFromDoor: 2
+  safeDistanceFromDoor: 1
   lockRoomOnEnter: 1
   roomEnemies:
   - {fileID: 940051705}
@@ -65537,6 +65493,7 @@ GameObject:
   - component: {fileID: 2035208120}
   - component: {fileID: 2035208119}
   - component: {fileID: 2035208121}
+  - component: {fileID: 2035208122}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -65591,7 +65548,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: cf261ab541a7c2e45a96f45ab141523f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -65753,6 +65710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  statusEffectFlash: {fileID: 2035208122}
   healthBar: {fileID: 1854370438}
 --- !u!61 &2035208121
 BoxCollider2D:
@@ -65799,6 +65757,46 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.3928368}
   m_EdgeRadius: 0
+--- !u!114 &2035208122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035208109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ea9b8fc4945e3d42a3a44b20f510305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
+  damageDuration: 0.3
+  healColor: {r: 0, g: 1, b: 0, a: 1}
+  healDuration: 0.3
 --- !u!1 &2036286920
 GameObject:
   m_ObjectHideFlags: 0
@@ -67785,10 +67783,6 @@ PrefabInstance:
     - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_Name
       value: Doors
-      objectReference: {fileID: 0}
-    - target: {fileID: 713947608091009318, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3020501115725687544, guid: 4809ce0aabf99cc4494c360b4cd80356, type: 3}
       propertyPath: m_LocalScale.x
