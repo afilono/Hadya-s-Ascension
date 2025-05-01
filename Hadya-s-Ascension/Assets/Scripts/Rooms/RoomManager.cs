@@ -10,11 +10,9 @@ public class RoomManager : MonoBehaviour
     
     [Header("Настройки комнаты")]
     [SerializeField] private bool lockRoomOnEnter = true;
-    [SerializeField] private bool refreshEnemiesOnUpdate = false;
     
     [Header("Враги")]
     [SerializeField] private List<EnemyController> roomEnemies = new List<EnemyController>();
-    [SerializeField] private bool autoDetectEnemiesInBounds = true;
     
     // События комнаты
     public event Action OnPlayerEnterRoom;
@@ -23,11 +21,11 @@ public class RoomManager : MonoBehaviour
     public event Action OnDoorsClosed;
     public event Action OnAllEnemiesDefeated;
     
-    private EnemyController[] enemies;
     private bool isPlayerInside = false;
     private bool areDoorsLocked = false;
     private Transform playerTransform;
     private Door lastEnteredDoor;
+    private WaveSpawner waveSpawner;
     
     void Start()
     {
@@ -42,28 +40,23 @@ public class RoomManager : MonoBehaviour
             doors = GetComponentsInChildren<Door>();
         }
         
-        // Подписываемся на события уничтожения врагов
-        EnemyController.OnEnemyDeath += CheckEnemiesStatus;
+        // Очищаем список от null-ссылок
+        roomEnemies.RemoveAll(e => e == null);
         
-        // Обновляем список врагов при старте
-        RefreshEnemiesList();
-    }
-    
-    void Update()
-    {
-        // По необходимости обновляем список врагов
-        if (refreshEnemiesOnUpdate)
+        // Подписываемся на события смерти для каждого врага
+        foreach (EnemyController enemy in roomEnemies)
         {
-            RefreshEnemiesList();
+            if (enemy != null)
+            {
+                enemy.OnEnemyDeath += HandleEnemyDeath;
+            }
         }
         
-        // Проверяем статус врагов в комнате
-        if (isPlayerInside && areDoorsLocked)
+        // Получаем WaveSpawner
+        waveSpawner = GetComponentInChildren<WaveSpawner>();
+        if (waveSpawner == null)
         {
-            if (AreAllEnemiesDefeated())
-            {
-                OpenDoors();
-            }
+            waveSpawner = GetComponent<WaveSpawner>();
         }
     }
     
@@ -72,35 +65,38 @@ public class RoomManager : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInside = true;
-            OnPlayerEnterRoom?.Invoke();
-            
-            // Определяем, через какую дверь зашел игрок
             if (doors.Length > 0)
             {
                 lastEnteredDoor = FindNearestDoor(other.transform.position);
             }
-            
-            // Обновляем список врагов при входе игрока
-            RefreshEnemiesList();
-            
-            // Если в комнате есть враги и нужно закрывать двери при входе
-            if (lockRoomOnEnter && !AreAllEnemiesDefeated())
-            {
-                StartCoroutine(WaitAndCheckDistance());
-            }
+            OnPlayerEnterRoom?.Invoke();
+            StartCoroutine(WaitAndCheckDistance());
+        }
+    }
+    
+    private System.Collections.IEnumerator DelayedRoomCheck()
+    {
+        yield return new WaitForSeconds(0.1f);
+        bool hasWaves = waveSpawner != null && waveSpawner.HasWaves();
+        if (lockRoomOnEnter && (roomEnemies.Count > 0 || hasWaves))
+        {
+            CloseDoors();
         }
     }
     
     private System.Collections.IEnumerator WaitAndCheckDistance()
     {
-        // Небольшая задержка, чтобы игрок успел войти
+        // Задержка, чтобы игрок успел войти в комнату
         yield return new WaitForSeconds(0.5f);
         
         if (isPlayerInside && playerTransform != null && lastEnteredDoor != null)
         {
-            float distanceToEnteredDoor = Vector3.Distance(playerTransform.position, lastEnteredDoor.transform.position);
+            float distanceToEnteredDoor = Vector3.Distance(
+                playerTransform.position, 
+                lastEnteredDoor.transform.position
+            );
             
-            // Если игрок отошел на безопасное расстояние от двери - закрываем двери
+            // Закрываем двери, если игрок отошел на безопасное расстояние
             if (distanceToEnteredDoor > safeDistanceFromDoor)
             {
                 CloseDoors();
@@ -121,6 +117,7 @@ public class RoomManager : MonoBehaviour
     {
         if (!areDoorsLocked)
         {
+            Debug.Log("Закрываем двери комнаты");
             areDoorsLocked = true;
             
             foreach (Door door in doors)
@@ -137,6 +134,7 @@ public class RoomManager : MonoBehaviour
     {
         if (areDoorsLocked)
         {
+            Debug.Log("Открываем двери комнаты");
             areDoorsLocked = false;
             
             foreach (Door door in doors)
@@ -147,6 +145,7 @@ public class RoomManager : MonoBehaviour
             
             OnDoorsOpened?.Invoke();
             
+            // Вызываем событие о том, что все враги уничтожены
             if (AreAllEnemiesDefeated())
             {
                 OnAllEnemiesDefeated?.Invoke();
@@ -156,6 +155,8 @@ public class RoomManager : MonoBehaviour
     
     private Door FindNearestDoor(Vector3 position)
     {
+        if (doors.Length == 0) return null;
+        
         Door nearest = doors[0];
         float minDistance = float.MaxValue;
         
@@ -180,7 +181,8 @@ public class RoomManager : MonoBehaviour
         if (enemy != null && !roomEnemies.Contains(enemy))
         {
             roomEnemies.Add(enemy);
-            RefreshEnemiesList();
+            enemy.OnEnemyDeath += HandleEnemyDeath;
+            Debug.Log($"Враг добавлен в комнату. Всего врагов: {roomEnemies.Count}");
         }
     }
     
@@ -192,58 +194,33 @@ public class RoomManager : MonoBehaviour
         if (enemy != null && roomEnemies.Contains(enemy))
         {
             roomEnemies.Remove(enemy);
-            RefreshEnemiesList();
+            enemy.OnEnemyDeath -= HandleEnemyDeath;
+            Debug.Log($"Враг удален из комнаты. Осталось: {roomEnemies.Count}");
         }
     }
     
-    private void RefreshEnemiesList()
+    /// <summary>
+    /// Проверить наличие врагов в комнате
+    /// </summary>
+    public bool HasEnemies()
     {
-        // Если нужно автоматически определять врагов в границах комнаты
-        if (autoDetectEnemiesInBounds)
-        {
-            Collider2D roomCollider = GetComponent<Collider2D>();
-            if (roomCollider != null)
-            {
-                // Очищаем старый список, если он был заполнен автоматически
-                if (roomEnemies == null)
-                    roomEnemies = new List<EnemyController>();
-                
-                // Определяем границы комнаты
-                Bounds roomBounds = roomCollider.bounds;
-                
-                // Находим врагов только если список пуст или нужно обновлять
-                if (roomEnemies.Count == 0 || refreshEnemiesOnUpdate)
-                {
-                    // Добавляем врагов из сцены, которые находятся в границах комнаты
-                    if (refreshEnemiesOnUpdate)
-                        roomEnemies.Clear();
-                    
-                    EnemyController[] allEnemies = FindObjectsOfType<EnemyController>();
-                    foreach (EnemyController enemy in allEnemies)
-                    {
-                        if (enemy != null && roomBounds.Contains(enemy.transform.position))
-                        {
-                            if (!roomEnemies.Contains(enemy))
-                                roomEnemies.Add(enemy);
-                        }
-                    }
-                }
-            }
-        }
-        
-        // Удаляем null-ссылки из списка
+        // Очищаем null-ссылки
+        roomEnemies.RemoveAll(e => e == null);
+        return roomEnemies.Count > 0;
+    }
+    
+    /// <summary>
+    /// Проверить, все ли враги уничтожены
+    /// </summary>
+    public bool AreAllEnemiesDefeated()
+    {
+        // Очищаем null-ссылки
         roomEnemies.RemoveAll(e => e == null);
         
-        // Преобразуем список в массив для более быстрого доступа
-        enemies = roomEnemies.ToArray();
-    }
-    
-    private bool AreAllEnemiesDefeated()
-    {
-        if (enemies == null || enemies.Length == 0)
+        if (roomEnemies.Count == 0)
             return true;
             
-        foreach (EnemyController enemy in enemies)
+        foreach (EnemyController enemy in roomEnemies)
         {
             if (enemy != null && enemy.Health > 0)
                 return false;
@@ -252,28 +229,40 @@ public class RoomManager : MonoBehaviour
         return true;
     }
     
-    private void CheckEnemiesStatus(EnemyController deadEnemy)
+    /// <summary>
+    /// Обработчик события смерти врага
+    /// </summary>
+    private void HandleEnemyDeath(EnemyController deadEnemy)
     {
-        // Проверяем, входил ли этот враг в нашу комнату
         if (roomEnemies.Contains(deadEnemy))
         {
-            // Удаляем мертвого врага из списка
             roomEnemies.Remove(deadEnemy);
+            Debug.Log($"Враг уничтожен. Осталось врагов: {roomEnemies.Count}");
             
-            // Обновляем массив
-            enemies = roomEnemies.ToArray();
-            
-            // Проверяем, не пора ли открыть двери
-            if (isPlayerInside && areDoorsLocked && AreAllEnemiesDefeated())
+            // Вызываем событие, если все враги уничтожены
+            if (roomEnemies.Count == 0)
             {
-                OpenDoors();
+                Debug.Log("Все враги уничтожены, вызываем событие");
+                OnAllEnemiesDefeated?.Invoke();
+                if(waveSpawner == null)
+                    OpenDoors();
             }
         }
     }
     
     private void OnDestroy()
     {
-        // Отписываемся от события
-        EnemyController.OnEnemyDeath -= CheckEnemiesStatus;
+        // Безопасное отписывание от событий
+        List<EnemyController> enemiesCopy = new List<EnemyController>(roomEnemies);
+        
+        foreach (EnemyController enemy in enemiesCopy)
+        {
+            if (enemy != null)
+            {
+                enemy.OnEnemyDeath -= HandleEnemyDeath;
+            }
+        }
+        
+        roomEnemies.Clear();
     }
 }

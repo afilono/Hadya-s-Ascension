@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     public float Health => currentHealth;
 
     public delegate void EnemyDeathHandler(EnemyController enemy);
-    public static event EnemyDeathHandler OnEnemyDeath;
+    public event EnemyDeathHandler OnEnemyDeath;
 
     void Start()
     {
