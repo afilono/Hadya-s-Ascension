@@ -35,6 +35,16 @@ public class HealthSystem : MonoBehaviour, IDamageable
             Die();
         }
     }
+    
+    public void AddHp(float health)
+    {
+        currentHealth += Mathf.Clamp(health, 0, maxHealth);
+
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHealth);
+        }
+    }
 
     public void Die()
     {
