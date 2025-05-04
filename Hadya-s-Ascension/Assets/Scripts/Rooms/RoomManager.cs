@@ -14,7 +14,6 @@ public class RoomManager : MonoBehaviour
     [Header("Враги")]
     [SerializeField] private List<Enemy> roomEnemies = new List<Enemy>();
     
-    // События комнаты
     public event Action OnPlayerEnterRoom;
     public event Action OnPlayerExitRoom;
     public event Action OnDoorsOpened;
@@ -23,28 +22,24 @@ public class RoomManager : MonoBehaviour
     
     private bool isPlayerInside = false;
     private bool areDoorsLocked = false;
-    private bool wasRoomCleared = false; // Новый флаг для отслеживания, была ли комната очищена
+    private bool wasRoomCleared = false;
     private Transform playerTransform;
     private Door lastEnteredDoor;
     private WaveSpawner waveSpawner;
     
     void Start()
     {
-        // Находим игрока
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
             playerTransform = player.transform;
         
-        // Находим двери, если они не назначены вручную
         if (doors == null || doors.Length == 0)
         {
             doors = GetComponentsInChildren<Door>();
         }
         
-        // Очищаем список от null-ссылок
         roomEnemies.RemoveAll(e => e == null);
         
-        // Подписываемся на события смерти для каждого врага
         foreach (Enemy enemy in roomEnemies)
         {
             if (enemy != null)
@@ -53,12 +48,13 @@ public class RoomManager : MonoBehaviour
             }
         }
         
-        // Получаем WaveSpawner
         waveSpawner = GetComponentInChildren<WaveSpawner>();
         if (waveSpawner == null)
         {
             waveSpawner = GetComponent<WaveSpawner>();
         }
+        
+        DisableEnemies();
     }
     
     private void OnTriggerEnter2D(Collider2D other)
@@ -66,13 +62,14 @@ public class RoomManager : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInside = true;
+            EnableEnemies();
+            
             if (doors.Length > 0)
             {
                 lastEnteredDoor = FindNearestDoor(other.transform.position);
             }
             OnPlayerEnterRoom?.Invoke();
             
-            // Проверяем была ли комната очищена ранее
             if (!wasRoomCleared)
             {
                 StartCoroutine(WaitAndCheckDistance());
@@ -84,7 +81,6 @@ public class RoomManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         bool hasWaves = waveSpawner != null && waveSpawner.HasWaves();
-        // Не закрываем двери, если комната уже была очищена
         if (lockRoomOnEnter && !wasRoomCleared && (roomEnemies.Count > 0 || hasWaves))
         {
             CloseDoors();
@@ -93,10 +89,8 @@ public class RoomManager : MonoBehaviour
     
     private System.Collections.IEnumerator WaitAndCheckDistance()
     {
-        // Задержка, чтобы игрок успел войти в комнату
         yield return new WaitForSeconds(0.5f);
         
-        // Не проверяем дистанцию, если комната уже очищена
         if (isPlayerInside && playerTransform != null && lastEnteredDoor != null && !wasRoomCleared)
         {
             float distanceToEnteredDoor = Vector3.Distance(
@@ -104,7 +98,6 @@ public class RoomManager : MonoBehaviour
                 lastEnteredDoor.transform.position
             );
             
-            // Закрываем двери, если игрок отошел на безопасное расстояние
             if (distanceToEnteredDoor > safeDistanceFromDoor)
             {
                 CloseDoors();
@@ -117,13 +110,35 @@ public class RoomManager : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInside = false;
+            DisableEnemies();
             OnPlayerExitRoom?.Invoke();
+        }
+    }
+    
+    public void EnableEnemies()
+    {
+        foreach (Enemy enemy in roomEnemies)
+        {
+            if (enemy != null)
+            {
+                enemy.gameObject.SetActive(true);
+            }
+        }
+    }
+    
+    public void DisableEnemies()
+    {
+        foreach (Enemy enemy in roomEnemies)
+        {
+            if (enemy != null)
+            {
+                enemy.gameObject.SetActive(false);
+            }
         }
     }
     
     public void CloseDoors()
     {
-        // Не закрываем двери, если комната уже была очищена
         if (!areDoorsLocked && !wasRoomCleared)
         {
             Debug.Log("Закрываем двери комнаты");
@@ -154,7 +169,6 @@ public class RoomManager : MonoBehaviour
             
             OnDoorsOpened?.Invoke();
             
-            // Отмечаем комнату как очищенную при открытии дверей после победы
             if (AreAllEnemiesDefeated())
             {
                 wasRoomCleared = true;
@@ -189,6 +203,12 @@ public class RoomManager : MonoBehaviour
         {
             roomEnemies.Add(enemy);
             enemy.OnEnemyDeath += HandleEnemyDeath;
+            
+            if (!isPlayerInside)
+            {
+                enemy.gameObject.SetActive(false);
+            }
+            
             Debug.Log($"Враг добавлен в комнату. Всего врагов: {roomEnemies.Count}");
         }
     }
@@ -203,19 +223,12 @@ public class RoomManager : MonoBehaviour
         }
     }
     
-    /// <summary>
-    /// Проверить наличие врагов в комнате
-    /// </summary>
     public bool HasEnemies()
     {
-        // Очищаем null-ссылки
         roomEnemies.RemoveAll(e => e == null);
         return roomEnemies.Count > 0;
     }
     
-    /// <summary>
-    /// Проверить, все ли враги уничтожены
-    /// </summary>
     public bool AreAllEnemiesDefeated()
     {
         roomEnemies.RemoveAll(e => e == null);
@@ -232,9 +245,6 @@ public class RoomManager : MonoBehaviour
         return true;
     }
     
-    /// <summary>
-    /// Обработчик события смерти врага
-    /// </summary>
     private void HandleEnemyDeath(Enemy deadEnemy)
     {
         if (roomEnemies.Contains(deadEnemy))
@@ -244,7 +254,6 @@ public class RoomManager : MonoBehaviour
             
             if (roomEnemies.Count == 0)
             {
-                // Отмечаем комнату как очищенную, если все враги побеждены
                 if (waveSpawner == null || !waveSpawner.HasWaves())
                 {
                     wasRoomCleared = true;
