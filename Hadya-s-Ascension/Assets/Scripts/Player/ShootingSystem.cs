@@ -7,6 +7,7 @@ public class ShootingSystem : MonoBehaviour
     [SerializeField] private float projectileSpeed = 10f;
     [SerializeField] private float fireCooldown = 0.5f;
     [SerializeField] private int projectileDamage = 10;
+    [SerializeField] private AudioSource fireSound;
     
     [Header("Visual Feedback")]
     [SerializeField] private bool rotateTowardsMouse = true;
@@ -103,6 +104,8 @@ public class ShootingSystem : MonoBehaviour
 
         GameObject projectile = Instantiate(projectilePrefab, spawnPosition, rotation);
         projectile.transform.SetParent(null);
+        
+        fireSound?.Play();
         
         Projectile projectileComponent = projectile.GetComponent<Projectile>();
         if (projectileComponent != null)

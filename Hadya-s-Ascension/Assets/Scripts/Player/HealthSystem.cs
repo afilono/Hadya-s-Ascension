@@ -5,6 +5,7 @@ public class HealthSystem : MonoBehaviour, IDamageable
 {
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private StatusEffectFlash statusEffectFlash;
+    [SerializeField] private AudioSource hitSound;
     private float currentHealth;
     
     public HealthBar healthBar;
@@ -34,6 +35,8 @@ public class HealthSystem : MonoBehaviour, IDamageable
         
         statusEffectFlash?.Flash();
 
+        hitSound.Play();
+        
         if (currentHealth <= 0)
         {
             Die();

@@ -15,9 +15,17 @@ public class Boss : Enemy
     private Animator animator;
     private bool isPhase2 = false;
     public bool isFlipped = false;
-    private bool isPlayerInRoom = false;
+    protected bool isPlayerInRoom = false;
 
     public float MaxHealth => maxHealth;
+
+    private void Awake()
+    {
+        if (bossHealthUI != null)
+        {
+            bossHealthUI.SetActive(false);
+        }
+    }
 
     protected override void Start()
     {
@@ -44,10 +52,6 @@ public class Boss : Enemy
         }
         
         SetAIActive(false);
-        if (bossHealthUI != null)
-        {
-            bossHealthUI.SetActive(false);
-        }
     }
 
     void OnDestroy()
