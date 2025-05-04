@@ -60,7 +60,7 @@ MonoBehaviour:
   attackCooldown: 3
   wallMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   repositionDistance: 2
 --- !u!1101 &-5260131067446821321
 AnimatorStateTransition:
@@ -189,10 +189,10 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.24999994
   m_TransitionOffset: 0
-  m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_ExitTime: 0.7241192
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -315,7 +315,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.8148148
+  m_ExitTime: 0.80416423
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -338,7 +338,7 @@ AnimatorStateMachine:
     m_Position: {x: 170, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9025978974027023764}
-    m_Position: {x: 370, y: -20, z: 0}
+    m_Position: {x: 330, y: 10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7859850603214507666}
     m_Position: {x: 370, y: -120, z: 0}

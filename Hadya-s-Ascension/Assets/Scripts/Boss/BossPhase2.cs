@@ -51,10 +51,24 @@ public class BossPhase2 : StateMachineBehaviour
 
     private void MoveBoss(Vector2 direction)
     {
-        RaycastHit2D hit = Physics2D.Raycast(rb.position, direction, speed * Time.fixedDeltaTime, wallMask);
+        // «амен€ем простой Raycast на BoxCast дл€ более надежного обнаружени€ стен
+        Vector2 boxSize = new Vector2(1f, 1.5f); // –азмер соответствует коллайдеру босса
+        RaycastHit2D hit = Physics2D.BoxCast(rb.position, boxSize, 0f, direction, 
+            speed * Time.fixedDeltaTime, wallMask);
+    
         if (hit.collider == null)
         {
             rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            Vector2 alternateDirection = new Vector2(direction.y, -direction.x).normalized;
+            hit = Physics2D.BoxCast(rb.position, boxSize, 0f, alternateDirection, 
+                speed * Time.fixedDeltaTime, wallMask);
+            if (hit.collider == null)
+            {
+                rb.MovePosition(rb.position + alternateDirection * speed * Time.fixedDeltaTime * 0.5f);
+            }
         }
     }
 

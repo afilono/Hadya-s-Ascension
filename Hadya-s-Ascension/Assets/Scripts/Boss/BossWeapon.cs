@@ -25,9 +25,24 @@ public class BossWeapon : MonoBehaviour
     {
         Vector3 pos = transform.position + attackOffset;
         Collider2D colInfo = Physics2D.OverlapCircle(pos, attackRange, attackMask);
-        if (colInfo != null && colInfo.TryGetComponent<PlayerController>(out PlayerController player))
+        
+        if (colInfo != null)
         {
-            player.TakeDamage(attackDamage);
+            // Ищем компонент IDamageable вместо PlayerController
+            IDamageable damageable = colInfo.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.TakeDamage(attackDamage);
+            }
+            else
+            {
+                // Если интерфейс не найден, можно попробовать найти HealthSystem напрямую
+                HealthSystem healthSystem = colInfo.GetComponent<HealthSystem>();
+                if (healthSystem != null)
+                {
+                    healthSystem.TakeDamage(attackDamage);
+                }
+            }
         }
     }
 
@@ -60,5 +75,12 @@ public class BossWeapon : MonoBehaviour
         {
             Debug.LogError("BossArrowProjectile component missing on arrow prefab!");
         }
+    }
+    
+    void OnDrawGizmosSelected()
+    {
+        // Визуализация радиуса атаки в редакторе
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + attackOffset, attackRange);
     }
 }

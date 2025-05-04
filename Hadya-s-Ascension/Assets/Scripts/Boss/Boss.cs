@@ -1,63 +1,126 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Boss : MonoBehaviour
+public class Boss : Enemy
 {
+    [Header("РќР°СЃС‚СЂРѕР№РєРё Р±РѕСЃСЃР°")]
     public Transform Player;
-    public int maxHealth = 100;
-    public int currentHealth;
-    public int phase2HealthThreshold = 50; // Порог здоровья для перехода во вторую фазу
+    public float phase2HealthThreshold = 50f;
+    private RoomManager roomManager;
+    
+    [Header("UI Р·РґРѕСЂРѕРІСЊСЏ")]
+    public GameObject bossHealthUI;
 
-    private Animator animator; // Ссылка на аниматор
-    private bool isPhase2 = false; // Флаг второй фазы
+    private Animator animator;
+    private bool isPhase2 = false;
     public bool isFlipped = false;
+    protected bool isPlayerInRoom = false;
 
-    // Изменено на статическое событие
-    public delegate void BossDeathHandler();
-    public static event BossDeathHandler OnBossDeath;
+    public float MaxHealth => maxHealth;
 
-    public Boss boss;
-    public Slider healthSlider;
-    void Start()
+    private void Awake()
     {
-        animator = GetComponent<Animator>();
-        currentHealth = maxHealth;
+        if (bossHealthUI != null)
+        {
+            bossHealthUI.SetActive(false);
+        }
+    }
 
+    protected override void Start()
+    {
+        base.Start();
+        
+        animator = GetComponent<Animator>();
+        
         if (Player == null)
         {
             Player = GameObject.FindGameObjectWithTag("Player").transform;
         }
-
-        if (boss == null)
+        
+        roomManager = GetComponentInParent<RoomManager>();
+        if (roomManager == null)
         {
-            boss = FindObjectOfType<Boss>();
-            if (boss == null) Debug.LogError("Boss not found in the scene!");
+            roomManager = FindObjectOfType<RoomManager>();
+        }
+        
+        if (roomManager != null)
+        {
+            roomManager.OnPlayerEnterRoom += HandlePlayerEnterRoom;
+            roomManager.OnPlayerExitRoom += HandlePlayerExitRoom;
+            Debug.Log("Р‘РѕСЃСЃ РїРѕРґРїРёСЃР°Р»СЃСЏ РЅР° СЃРѕР±С‹С‚РёСЏ РєРѕРјРЅР°С‚С‹");
+        }
+        
+        SetAIActive(false);
     }
 
-        if (healthSlider == null)
+    void OnDestroy()
+    {
+        if (roomManager != null)
         {
-            healthSlider = GetComponent<Slider>();
-            if (healthSlider == null) Debug.LogError("Health Slider not assigned!");
+            roomManager.OnPlayerEnterRoom -= HandlePlayerEnterRoom;
+            roomManager.OnPlayerExitRoom -= HandlePlayerExitRoom;
         }
-
-        healthSlider.maxValue = boss.maxHealth;
-        healthSlider.value = boss.currentHealth;
     }
 
     void Update()
     {
-        if (!isPhase2 && currentHealth <= phase2HealthThreshold)
+        if (isPlayerInRoom)
         {
-            isPhase2 = true;
-            animator.SetBool("IsPhase2", true); // Используем булевый параметр вместо триггера
-            Debug.Log("Босс перешёл во вторую фазу!");
+            // Р”РѕР±Р°РІР»СЏРµРј РІС‹Р·РѕРІ РјРµС‚РѕРґР° РїРѕРІРѕСЂРѕС‚Р° РІ Update
+            LookAtPlayer();
+        
+            if (!isPhase2 && currentHealth <= phase2HealthThreshold)
+            {
+                isPhase2 = true;
+                animator.SetBool("IsPhase2", true);
+                Debug.Log("Р‘РѕСЃСЃ РїРµСЂРµС€С‘Р» РІРѕ РІС‚РѕСЂСѓСЋ С„Р°Р·Сѓ!");
+            }
         }
     }
+    
+    private void HandlePlayerEnterRoom()
+    {
+        isPlayerInRoom = true;
+        Debug.Log("РРіСЂРѕРє РІРѕС€РµР» РІ РєРѕРјРЅР°С‚Сѓ Р±РѕСЃСЃР°!");
+        
+        SetAIActive(true);
+        
+        if (bossHealthUI != null)
+        {
+            bossHealthUI.SetActive(true);
+        }
+    }
+    
+    private void HandlePlayerExitRoom()
+    {
+        isPlayerInRoom = false;
+        Debug.Log("РРіСЂРѕРє РІС‹С€РµР» РёР· РєРѕРјРЅР°С‚С‹ Р±РѕСЃСЃР°!");
+        
+        SetAIActive(false);
+        
+        if (bossHealthUI != null)
+        {
+            bossHealthUI.SetActive(false);
+        }
+    }
+    
+    public void SetAIActive(bool active)
+    {
+        Animator animator = GetComponent<Animator>();
+        if (animator != null)
+        {
+            animator.SetBool("IsActive", active);
+        }
+    
+        if (GetComponent<BossWeapon>() != null)
+            GetComponent<BossWeapon>().enabled = active;
+    }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        currentHealth = Mathf.Max(currentHealth, 0); // Здоровье не может быть меньше 0
+        currentHealth = Mathf.Max(currentHealth, 0f);
 
         if (currentHealth <= 0)
         {
@@ -65,28 +128,32 @@ public class Boss : MonoBehaviour
         }
     }
 
-    void Die()
+    public override void Die()
     {
-        Debug.Log("Босс погиб!");
-        // Вызываем статическое событие
-        OnBossDeath?.Invoke();
+        if (isDead) return;
+        
+        isDead = true;
+        Debug.Log("Р‘РѕСЃСЃ РїРѕРіРёР±!");
+        
+        OnEnemyDeath?.Invoke(this);
+        
         Destroy(gameObject);
     }
 
     public void LookAtPlayer()
     {
-        if (Player == null) return; // Проверяем, что игрок назначен
+        if (Player == null) return;
 
         Vector3 scale = transform.localScale;
 
         if (Player.position.x < transform.position.x && isFlipped)
         {
-            scale.x = Mathf.Abs(scale.x); // Отражаем спрайт по горизонтали
+            scale.x = Mathf.Abs(scale.x);
             isFlipped = false;
         }
         else if (Player.position.x > transform.position.x && !isFlipped)
         {
-            scale.x = -Mathf.Abs(scale.x); // Возвращаем спрайт в исходное состояние
+            scale.x = -Mathf.Abs(scale.x);
             isFlipped = true;
         }
 
