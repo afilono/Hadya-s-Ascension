@@ -712,9 +712,7 @@ MonoBehaviour:
   - {fileID: 2026378680}
   safeDistanceFromDoor: 1
   lockRoomOnEnter: 1
-  roomEnemies:
-  - {fileID: 0}
-  - {fileID: 0}
+  roomEnemies: []
 --- !u!61 &24295822
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17833,8 +17831,7 @@ MonoBehaviour:
   - {fileID: 170459297}
   safeDistanceFromDoor: 1
   lockRoomOnEnter: 1
-  roomEnemies:
-  - {fileID: 0}
+  roomEnemies: []
 --- !u!1 &658676860
 GameObject:
   m_ObjectHideFlags: 0
@@ -20558,7 +20555,7 @@ MonoBehaviour:
   - {fileID: 1095191756}
   waitForWaveClear: 1
   autoStart: 1
-  roomManager: {fileID: 654171664}
+  roomManager: {fileID: 24295821}
 --- !u!1 &824352407
 GameObject:
   m_ObjectHideFlags: 0
@@ -20928,8 +20925,7 @@ MonoBehaviour:
   - {fileID: 1461911143}
   safeDistanceFromDoor: 1
   lockRoomOnEnter: 1
-  roomEnemies:
-  - {fileID: 0}
+  roomEnemies: []
 --- !u!61 &845410070
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -29508,7 +29504,7 @@ MonoBehaviour:
   - {fileID: 39589391}
   waitForWaveClear: 1
   autoStart: 1
-  roomManager: {fileID: 654171664}
+  roomManager: {fileID: 845410069}
 --- !u!1 &1195380308
 GameObject:
   m_ObjectHideFlags: 0
