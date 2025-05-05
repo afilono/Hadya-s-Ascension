@@ -4,7 +4,7 @@ public class HealthPickup : MonoBehaviour
 {
     [Header("Настройки бонуса")]
     [SerializeField] private float healthAmount = 25f; // Количество восстанавливаемого здоровья
-    [SerializeField] private float playerMaxHealth = 100f; // Максимальное здоровье игрока
+    [SerializeField] private float playerMaxHealth = 150f; // Максимальное здоровье игрока
     
     [Header("Настройки притяжения")]
     [SerializeField] private float attractionRadius = 5f; // Радиус притяжения
