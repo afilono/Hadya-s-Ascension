@@ -11,13 +11,23 @@
 На уровне вы можете разбивать вазы(при попадании 2 снарядов), из ваз с шансом 30% выпадают сердца, которые востанавливают здоровье.  
 Сделал дополнительный релиз в который добавил билд с изменением системы хила(не совсем корректно работала).
 Ссылки на использованные источники:
+
 Музыка и звук:
+
 https://alkakrab.itch.io/free-12-tracks-pixel-rpg-game-music-pack
+
 https://pixabay.com/sound-effects/search/fireball/
+
 https://pixabay.com/sound-effects/search/hurt/
+
 https://pixabay.com/sound-effects/search/sliding-door/
+
 https://pixabay.com/sound-effects/search/punch%20a%20rock/
+
 Кнопки в меню:
+
 https://kenney.nl/assets/ui-pack-pixel-adventure
+
 Стрельба:
+
 https://favpng.com/png_view/fireball-sprite-animation-desktop-wallpaper-visual-effects-png/bA9TDHbE
